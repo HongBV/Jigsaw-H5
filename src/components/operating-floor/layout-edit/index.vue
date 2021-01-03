@@ -1,5 +1,6 @@
 <template>
   <div class="layout-edit">
+    <toolbar @clearPage="clearPage" />
     <div class="viewport" @drop="onDrop($event)" @dragover="onDragover($event)">
       <grid-layout
         :layout.sync="layout"
@@ -32,12 +33,14 @@
 <script>
 import { GridLayout, GridItem } from "vue-grid-layout";
 import LayoutItem from "@/components/operating-floor/layout-item";
+import Toolbar from "@/components/operating-floor/toolbar";
 export default {
   name: "LayoutEdit",
   components: {
     GridLayout,
     GridItem,
-    LayoutItem
+    LayoutItem,
+    Toolbar
   },
   data() {
     return {
@@ -76,6 +79,10 @@ export default {
     // 删除组件
     deleteComponent(id) {
       this.layout = this.layout.filter(item => item.id === id);
+    },
+    // 清空页面
+    clearPage() {
+      this.layout = [];
     }
   }
 };
