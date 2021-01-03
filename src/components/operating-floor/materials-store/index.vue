@@ -1,6 +1,6 @@
 <template>
   <div class="materials-store">
-    <p>素材仓库</p>
+    <h2>素材仓库</h2>
     <div class="materials-list">
       <div
         v-for="material in materialsList"
@@ -9,7 +9,8 @@
         draggable="true"
         @dragstart="onDragstart($event, material)"
       >
-        <div class="material-card__preview">
+        <div class="material-card__preview" draggable="false">
+          <div class="material-card__mask"></div>
           <component :is="material.component"></component>
         </div>
         <p class="material-card__name">{{ material.name }}</p>
@@ -39,7 +40,13 @@ export default {
 <style scoped lang="scss">
 .materials-store {
   height: 100%;
-  padding: 10px;
+  padding: 20px;
+  h2 {
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+  }
   .materials-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -55,14 +62,26 @@ export default {
         cursor: pointer;
       }
       &__preview {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 5px;
         height: 80px;
+      }
+      &__mask {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
       }
       &__name {
         margin: 0;
         text-align: center;
+        font-size: 14px;
+        color: #666666;
         background-color: #fafafa;
       }
     }

@@ -33,13 +33,7 @@ export default {
 
 <style scoped lang="scss">
 .layout-item {
-  .mask {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 1;
-  }
+  height: 100%;
+  text-align: center;
 }
 </style>

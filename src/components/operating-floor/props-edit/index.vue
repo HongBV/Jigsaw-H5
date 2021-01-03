@@ -1,16 +1,19 @@
 <template>
   <div class="props-edit">
-    <p>属性设置</p>
-    <template v-for="(editItem, idx) in currentMaterial.editData">
-      <div v-if="editItem.type === 'Text'" class="text-input" :key="idx">
-        <span class="title">{{ editItem.name }}</span>
-        <el-input
-          class="input"
-          v-model="currentMaterial.config[editItem.key]"
-          placeholder="请输入内容"
-        ></el-input>
-      </div>
-    </template>
+    <h2>属性设置</h2>
+    <div
+      class="text-input"
+      v-for="(editItem, idx) in currentMaterial.editData"
+      :key="idx"
+    >
+      <span class="title">{{ editItem.name }}</span>
+      <el-input
+        class="input"
+        v-model="currentMaterial.config[editItem.key]"
+        :label="editItem.name"
+        :type="editItem.type"
+      ></el-input>
+    </div>
   </div>
 </template>
 
@@ -28,15 +31,46 @@ export default {
 </script>
 <style scoped lang="scss">
 .props-edit {
-  padding: 10px 20px;
+  padding: 20px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 4px 0 rgba(0, 0, 0, 0.1);
+  h2 {
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000;
+  }
   .text-input {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
     .title {
-      flex: 1;
+      width: 60px;
+      height: 32px;
+      line-height: 32px;
+      font-size: 14px;
+      color: #4a4a4a;
     }
     .input {
-      flex: 5;
+      width: auto;
+      ::v-deep.el-input__inner {
+        height: 30px;
+        line-height: 30px;
+        cursor: pointer;
+        &[type="Text"] {
+          width: 200px;
+        }
+        &[type="Number"] {
+          width: 70px;
+          padding-right: 0;
+        }
+        &[type="Color"] {
+          width: 70px;
+          padding: 0 3px;
+        }
+      }
     }
   }
 }

@@ -9,7 +9,7 @@
         :is-resizable="true"
         :is-mirrored="false"
         :vertical-compact="true"
-        :margin="[3, 3]"
+        :margin="[2, 2]"
         :use-css-transforms="true"
       >
         <grid-item
@@ -44,6 +44,12 @@ export default {
       layout: []
     };
   },
+  computed: {
+    maxHeight() {
+      if (!this.layout.length) return 0;
+      return Math.max(...this.layout.map(item => item.y + item.h));
+    }
+  },
   methods: {
     onDragover(e) {
       e.preventDefault();
@@ -55,13 +61,13 @@ export default {
     },
     // 添加组件
     addComponent(material) {
-      const { component, config, editData } = material;
+      const { component, config, editData, layout } = material;
       this.layout.push({
-        x: 0,
-        y: 0,
-        w: 24,
-        h: 10,
         i: this.layout.length,
+        x: 0,
+        y: this.maxHeight,
+        w: 24,
+        h: layout.h || 20,
         component,
         config,
         editData
@@ -84,9 +90,9 @@ export default {
   background-color: #f5f5f5;
   .viewport {
     width: 375px;
-    height: 667px;
+    min-height: 667px;
+    background-color: #fafafa;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
     .item {
       position: relative;
       overflow: hidden;
