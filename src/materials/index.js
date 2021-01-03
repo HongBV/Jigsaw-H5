@@ -6,9 +6,10 @@ import BvButton from "./button";
 import BvText from "./text";
 import BvImage from "./image";
 import BvPlaceholder from "./placeholder";
+import BvSwipe from "./swipe";
 
 // 所有组件列表
-const components = [BvButton, BvText, BvImage, BvPlaceholder];
+const components = [BvButton, BvText, BvImage, BvPlaceholder, BvSwipe];
 // 定义 install 方法，接收 Vue 作为参数
 const install = function(Vue) {
   // 判断是否安装，安装过就不继续往下执行
@@ -33,6 +34,7 @@ export {
   BvText,
   BvPlaceholder,
   BvImage,
+  BvSwipe,
   _register_components_object
 };
 
