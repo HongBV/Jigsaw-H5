@@ -1,6 +1,6 @@
 <template>
   <div class="toolbar">
-    <div class="toolbar__item" @click="toggleFullScreen">全屏 {{ isFull }}</div>
+    <div class="toolbar__item" @click="toggleFullScreen">全屏</div>
     <div class="toolbar__item" @click="clearPage">清空</div>
   </div>
 </template>
