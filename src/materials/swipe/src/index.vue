@@ -1,7 +1,7 @@
 <template>
   <van-swipe :autoplay="config.interval">
     <van-swipe-item v-for="(image, index) in config.images" :key="index">
-      <img v-lazy="image" />
+      <img :src="image" />
     </van-swipe-item>
   </van-swipe>
 </template>
