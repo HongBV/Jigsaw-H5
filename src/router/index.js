@@ -6,9 +6,20 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
+    redirect: "/operating-floor"
+  },
+  {
+    path: "/operating-floor",
     name: "OperatingFloor",
     component: () =>
-      import(/* webpackChunkName: "about" */ "@/views/OperatingFloor.vue")
+      import(
+        /* webpackChunkName: "OperatingFloor" */ "@/views/OperatingFloor.vue"
+      )
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import(/* webpackChunkName: "Login" */ "@/views/Login.vue")
   }
 ];
 
