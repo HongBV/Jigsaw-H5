@@ -8,11 +8,19 @@
     >
       <span class="title">{{ editItem.name }}</span>
       <el-input
+        v-if="['Text', 'Number', 'Color'].includes(editItem.type)"
         class="input"
         v-model="currentMaterial.config[editItem.key]"
         :label="editItem.name"
         :type="editItem.type"
       ></el-input>
+      <el-switch
+        v-if="editItem.type === 'Switch'"
+        v-model="currentMaterial.config[editItem.key]"
+        active-color="#13ce66"
+        inactive-color="#ff4949"
+      >
+      </el-switch>
     </div>
   </div>
 </template>
