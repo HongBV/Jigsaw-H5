@@ -22,11 +22,14 @@
       >
       </el-switch>
     </div>
+    <div class="footer">
+      <el-button @click="deleteItem" round type="danger">删除该组件</el-button>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "PropsEdit",
   components: {},
@@ -34,11 +37,18 @@ export default {
     ...mapState({
       currentMaterial: state => state.editor.currentMaterial
     })
+  },
+  methods: {
+    ...mapMutations(["deleteMaterial"]),
+    deleteItem() {
+      this.deleteMaterial(this.currentMaterial);
+    }
   }
 };
 </script>
 <style scoped lang="scss">
 .props-edit {
+  position: relative;
   padding: 20px;
   height: 100%;
   background: #fff;
@@ -80,6 +90,16 @@ export default {
         }
       }
     }
+  }
+  .footer {
+    position: absolute;
+    left: 0;
+    bottom: 50px;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 </style>

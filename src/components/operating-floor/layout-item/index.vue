@@ -23,9 +23,9 @@ export default {
     return {};
   },
   methods: {
-    ...mapMutations(["updateCurrentMaterial"]),
+    ...mapMutations(["setCurrentMaterial"]),
     editMaterial() {
-      this.updateCurrentMaterial(this.material);
+      this.setCurrentMaterial(this.material);
     }
   }
 };

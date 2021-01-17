@@ -6,8 +6,10 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   methods: {
+    ...mapMutations(["resetPage"]),
     // 切换全屏状态
     toggleFullScreen() {
       const isFull = !!(
@@ -44,7 +46,7 @@ export default {
     },
     // 清空页面
     clearPage() {
-      this.$emit("clearPage");
+      this.resetPage();
     }
   }
 };

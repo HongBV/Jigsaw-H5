@@ -1,9 +1,9 @@
 <template>
   <div class="layout-edit">
-    <toolbar @clearPage="clearPage" />
+    <toolbar />
     <div class="viewport" @drop="onDrop($event)" @dragover="onDragover($event)">
       <grid-layout
-        :layout.sync="layout"
+        :layout.sync="page"
         :col-num="24"
         :row-height="1"
         :is-draggable="true"
@@ -15,7 +15,7 @@
       >
         <grid-item
           class="item"
-          v-for="item in layout"
+          v-for="item in page"
           :x="item.x"
           :y="item.y"
           :w="item.w"
@@ -34,6 +34,7 @@
 import { GridLayout, GridItem } from "vue-grid-layout";
 import LayoutItem from "@/components/operating-floor/layout-item";
 import Toolbar from "@/components/operating-floor/toolbar";
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "LayoutEdit",
   components: {
@@ -42,18 +43,17 @@ export default {
     LayoutItem,
     Toolbar
   },
-  data() {
-    return {
-      layout: []
-    };
-  },
   computed: {
+    ...mapState({
+      page: state => state.editor.page
+    }),
     maxHeight() {
-      if (!this.layout.length) return 0;
-      return Math.max(...this.layout.map(item => item.y + item.h));
+      if (!this.page.length) return 0;
+      return Math.max(...this.page.map(item => item.y + item.h));
     }
   },
   methods: {
+    ...mapMutations(["addMaterial"]),
     onDragover(e) {
       e.preventDefault();
     },
@@ -65,8 +65,8 @@ export default {
     // 添加组件
     addComponent(material) {
       const { component, config, editData, layout } = material;
-      this.layout.push({
-        i: this.layout.length,
+      this.addMaterial({
+        i: this.page.length,
         x: 0,
         y: this.maxHeight,
         w: 24,
@@ -75,14 +75,6 @@ export default {
         config,
         editData
       });
-    },
-    // 删除组件
-    deleteComponent(id) {
-      this.layout = this.layout.filter(item => item.id === id);
-    },
-    // 清空页面
-    clearPage() {
-      this.layout = [];
     }
   }
 };
