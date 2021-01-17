@@ -1,30 +1,40 @@
 <template>
   <div class="props-edit">
-    <h2>属性设置</h2>
-    <div
-      class="text-input"
-      v-for="(editItem, idx) in currentMaterial.editData"
-      :key="idx"
-    >
-      <span class="title">{{ editItem.name }}</span>
-      <el-input
-        v-if="['Text', 'Number', 'Color'].includes(editItem.type)"
-        class="input"
-        v-model="currentMaterial.config[editItem.key]"
-        :label="editItem.name"
-        :type="editItem.type"
-      ></el-input>
-      <el-switch
-        v-if="editItem.type === 'Switch'"
-        v-model="currentMaterial.config[editItem.key]"
-        active-color="#13ce66"
-        inactive-color="#ff4949"
+    <header>属性设置</header>
+    <section v-if="editable">
+      <div
+        class="text-input"
+        v-for="(editItem, idx) in currentMaterial.editData"
+        :key="idx"
       >
-      </el-switch>
-    </div>
-    <div class="footer">
-      <el-button @click="deleteItem" round type="danger">删除该组件</el-button>
-    </div>
+        <span class="title">{{ editItem.name }}</span>
+        <el-input
+          v-if="['Text', 'Number', 'Color'].includes(editItem.type)"
+          class="input"
+          v-model="currentMaterial.config[editItem.key]"
+          :label="editItem.name"
+          :type="editItem.type"
+        ></el-input>
+        <el-switch
+          v-if="editItem.type === 'Switch'"
+          v-model="currentMaterial.config[editItem.key]"
+          active-color="#13ce66"
+          inactive-color="#ff4949"
+        >
+        </el-switch>
+      </div>
+    </section>
+    <section v-else>
+      <p>选择组件后即可编辑</p>
+    </section>
+    <footer>
+      <el-button @click="copyItem" round type="primary" :disabled="!editable">
+        复 制
+      </el-button>
+      <el-button @click="deleteItem" round type="danger" :disabled="!editable">
+        删 除
+      </el-button>
+    </footer>
   </div>
 </template>
 
@@ -35,13 +45,23 @@ export default {
   components: {},
   computed: {
     ...mapState({
+      page: state => state.editor.page,
       currentMaterial: state => state.editor.currentMaterial
-    })
+    }),
+    editable() {
+      return this.currentMaterial.editData;
+    }
   },
   methods: {
-    ...mapMutations(["deleteMaterial"]),
+    ...mapMutations(["deleteMaterial", "addMaterial"]),
     deleteItem() {
       this.deleteMaterial(this.currentMaterial);
+    },
+    copyItem() {
+      this.addMaterial({
+        ...JSON.parse(JSON.stringify(this.currentMaterial)),
+        i: this.page.length
+      });
     }
   }
 };
@@ -53,7 +73,7 @@ export default {
   height: 100%;
   background: #fff;
   box-shadow: -2px 0 4px 0 rgba(0, 0, 0, 0.1);
-  h2 {
+  header {
     margin-bottom: 16px;
     font-size: 18px;
     font-weight: 400;
@@ -91,7 +111,7 @@ export default {
       }
     }
   }
-  .footer {
+  footer {
     position: absolute;
     left: 0;
     bottom: 50px;
@@ -100,6 +120,9 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    .el-button {
+      width: 40%;
+    }
   }
 }
 </style>

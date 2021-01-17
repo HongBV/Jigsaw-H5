@@ -32,6 +32,7 @@ export default {
   height: 100%;
   overflow: hidden;
   .el-col {
+    min-width: 300px;
     height: 100%;
   }
 }

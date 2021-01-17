@@ -95,6 +95,7 @@ export default {
     .item {
       position: relative;
       overflow: hidden;
+      touch-action: none;
       &:hover {
         margin: -2px;
         border: 2px solid #006aff;

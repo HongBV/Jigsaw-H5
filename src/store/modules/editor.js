@@ -7,11 +7,11 @@ const mutations = {
   resetPage(state) {
     state.page = [];
   },
-  setCurrentMaterial(state, materialData) {
-    state.currentMaterial = materialData;
+  setCurrentMaterial(state, material) {
+    state.currentMaterial = material;
   },
-  addMaterial(state, materialData) {
-    state.page.push(materialData);
+  addMaterial(state, material) {
+    state.page.push(material);
   },
   deleteMaterial(state, material) {
     state.page = state.page.filter(item => item !== material);
