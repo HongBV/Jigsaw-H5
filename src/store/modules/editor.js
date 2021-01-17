@@ -1,5 +1,5 @@
 const state = {
-  page: [],
+  page: JSON.parse(localStorage.getItem("page") || "[]"),
   currentMaterial: {}
 };
 const actions = {};

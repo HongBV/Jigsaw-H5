@@ -51,7 +51,6 @@
 import { mapState, mapMutations } from "vuex";
 export default {
   name: "PropsEdit",
-  components: {},
   computed: {
     ...mapState({
       page: state => state.editor.page,

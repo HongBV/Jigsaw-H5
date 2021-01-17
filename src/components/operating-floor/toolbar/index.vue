@@ -1,13 +1,37 @@
 <template>
   <div class="toolbar">
-    <div class="toolbar__item" @click="toggleFullScreen">全屏</div>
-    <div class="toolbar__item" @click="clearPage">清空</div>
+    <el-tooltip content="全屏" placement="bottom">
+      <div class="toolbar__item" @click="toggleFullScreen">
+        <i class="el-icon-full-screen"></i>
+      </div>
+    </el-tooltip>
+    <el-tooltip content="保存" placement="bottom">
+      <div class="toolbar__item" @click="savePage">
+        <i class="el-icon-folder-checked"></i>
+      </div>
+    </el-tooltip>
+    <el-tooltip content="新建页面" placement="bottom">
+      <div class="toolbar__item">
+        <i class="el-icon-folder-add"></i>
+      </div>
+    </el-tooltip>
+    <el-tooltip content="清空页面" placement="bottom">
+      <div class="toolbar__item" @click="clearPage">
+        <i class="el-icon-delete"></i>
+      </div>
+    </el-tooltip>
   </div>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
+  name: "PropsEdit",
+  computed: {
+    ...mapState({
+      page: state => state.editor.page
+    })
+  },
   methods: {
     ...mapMutations(["resetPage"]),
     // 切换全屏状态
@@ -44,6 +68,14 @@ export default {
         document.webkitExitFullscreen();
       }
     },
+    // 保存页面
+    savePage() {
+      localStorage.setItem("page", JSON.stringify(this.page));
+      this.$message({
+        message: "保存成功",
+        type: "success"
+      });
+    },
     // 清空页面
     clearPage() {
       this.resetPage();
@@ -62,8 +94,9 @@ export default {
   border-radius: 20px;
   background-color: #ffffff;
   transform: translateX(-50%);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.05);
   &__item {
-    width: 60px;
+    width: 40px;
     text-align: center;
     cursor: pointer;
   }
