@@ -14,22 +14,34 @@ const materialsList = [
       {
         key: "width",
         name: "宽度",
-        type: "Number"
+        type: "Number",
+        step: 1,
+        min: 80,
+        max: 400
       },
       {
         key: "borderRadius",
         name: "圆角",
-        type: "Number"
+        type: "Number",
+        step: 1,
+        min: 0,
+        max: 100
       },
       {
         key: "fontSize",
         name: "文字大小",
-        type: "Number"
+        type: "Number",
+        step: 1,
+        min: 12,
+        max: 42
       },
       {
         key: "fontWeight",
         name: "文字粗细",
-        type: "Number"
+        type: "Number",
+        step: 100,
+        min: 300,
+        max: 800
       },
       {
         key: "color",
@@ -67,12 +79,18 @@ const materialsList = [
       {
         key: "fontSize",
         name: "文字大小",
-        type: "Number"
+        type: "Number",
+        step: 1,
+        min: 12,
+        max: 42
       },
       {
         key: "fontWeight",
         name: "文字粗细",
-        type: "Number"
+        type: "Number",
+        step: 100,
+        min: 300,
+        max: 800
       },
       {
         key: "color",
@@ -102,7 +120,10 @@ const materialsList = [
       {
         key: "borderRadius",
         name: "圆角",
-        type: "Number"
+        type: "Number",
+        step: 1,
+        min: 0,
+        max: 100
       }
     ],
     config: {
@@ -121,7 +142,10 @@ const materialsList = [
       {
         key: "height",
         name: "高度",
-        type: "Number"
+        type: "Number",
+        step: 1,
+        min: 10,
+        max: 800
       },
       {
         key: "backgroundColor",
@@ -144,7 +168,10 @@ const materialsList = [
       {
         key: "interval",
         name: "播放间隔",
-        type: "Number"
+        type: "Number",
+        step: 500,
+        min: 500,
+        max: 5000
       }
     ],
     config: {

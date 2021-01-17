@@ -9,12 +9,21 @@
       >
         <span class="title">{{ editItem.name }}</span>
         <el-input
-          v-if="['Text', 'Number', 'Color'].includes(editItem.type)"
+          v-if="['Text', 'Color'].includes(editItem.type)"
           class="input"
           v-model="currentMaterial.config[editItem.key]"
           :label="editItem.name"
           :type="editItem.type"
         ></el-input>
+        <el-input-number
+          v-if="editItem.type === 'Number'"
+          v-model="currentMaterial.config[editItem.key]"
+          size="small"
+          :step="editItem.step"
+          :max="editItem.max"
+          :min="editItem.min"
+          step-strictly
+        ></el-input-number>
         <el-switch
           v-if="editItem.type === 'Switch'"
           v-model="currentMaterial.config[editItem.key]"
