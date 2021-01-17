@@ -136,17 +136,9 @@ const materialsList = [
     component: "BvPlaceholder",
     name: "占位符",
     layout: {
-      h: 50
+      h: 20
     },
     editData: [
-      {
-        key: "height",
-        name: "高度",
-        type: "Number",
-        step: 1,
-        min: 10,
-        max: 800
-      },
       {
         key: "backgroundColor",
         name: "背景色",
@@ -154,8 +146,7 @@ const materialsList = [
       }
     ],
     config: {
-      height: 100,
-      backgroundColor: "#ffffff"
+      backgroundColor: "#fafafa"
     }
   },
   {

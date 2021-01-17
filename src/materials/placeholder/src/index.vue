@@ -2,7 +2,6 @@
   <div
     class="bv-placeholder"
     :style="{
-      height: `${config.height}px`,
       backgroundColor: config.backgroundColor
     }"
   ></div>
@@ -15,12 +14,15 @@ export default {
     config: {
       type: Object,
       default: () => ({
-        height: 50,
-        backgroundColor: "#ffffff"
+        backgroundColor: "#fafafa"
       })
     }
   }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.bv-placeholder {
+  height: 100%;
+}
+</style>
