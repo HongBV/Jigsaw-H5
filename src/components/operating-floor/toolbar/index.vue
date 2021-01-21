@@ -10,6 +10,11 @@
         <i class="el-icon-folder-checked"></i>
       </div>
     </el-tooltip>
+    <el-tooltip content="预览" placement="bottom">
+      <div class="toolbar__item" @click="preview">
+        <i class="el-icon-mobile-phone"></i>
+      </div>
+    </el-tooltip>
     <el-tooltip content="新建页面" placement="bottom">
       <div class="toolbar__item">
         <i class="el-icon-folder-add"></i>
@@ -67,6 +72,10 @@ export default {
       } else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
       }
+    },
+    // 预览
+    preview() {
+      this.$router.push({ name: "Preview" });
     },
     // 保存页面
     savePage() {
