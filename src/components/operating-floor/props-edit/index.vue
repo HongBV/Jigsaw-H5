@@ -1,6 +1,11 @@
 <template>
   <div class="props-edit">
-    <header>属性设置</header>
+    <header>
+      属性设置
+      <span v-if="currentMaterial.name && currentMaterial.name">
+        - {{ currentMaterial.name }}
+      </span>
+    </header>
     <section v-if="editable">
       <div
         class="text-input"
@@ -66,6 +71,7 @@ export default {
       this.deleteMaterial(this.currentMaterial);
     },
     copyItem() {
+      console.log(this.currentMaterial);
       this.addMaterial({
         ...JSON.parse(JSON.stringify(this.currentMaterial)),
         i: this.page.length

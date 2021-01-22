@@ -32,7 +32,7 @@ export default {
   box-shadow: #ebedf0 0 4px 12px;
   transform: translate(-50%, -50%);
   .viewport {
-    margin: 40px 15px 50px;
+    margin: 30px 15px 60px;
     width: 325px;
     height: 600px;
     border: solid 1px #dddddd;

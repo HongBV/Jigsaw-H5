@@ -64,7 +64,7 @@ export default {
     },
     // 添加组件
     addComponent(material) {
-      const { component, config, editData, layout } = material;
+      const { component, config, editData, layout, name } = material;
       this.addMaterial({
         i: this.page.length,
         x: 0,
@@ -72,6 +72,7 @@ export default {
         w: 24,
         h: layout.h || 20,
         component,
+        name,
         config,
         editData
       });
@@ -82,6 +83,7 @@ export default {
 
 <style scoped lang="scss">
 .layout-edit {
+  position: relative;
   height: 100%;
   display: flex;
   justify-content: center;

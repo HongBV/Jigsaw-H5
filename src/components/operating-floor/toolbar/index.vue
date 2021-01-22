@@ -104,6 +104,7 @@ export default {
   background-color: #ffffff;
   transform: translateX(-50%);
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.05);
+  z-index: 10;
   &__item {
     width: 40px;
     text-align: center;
