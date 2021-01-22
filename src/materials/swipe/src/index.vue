@@ -1,7 +1,7 @@
 <template>
-  <van-swipe :autoplay="config.interval">
+  <van-swipe :autoplay="config.interval" ref="swipe" class="swipe">
     <van-swipe-item v-for="(image, index) in config.images" :key="index">
-      <img :src="image" />
+      <img :src="image" draggable="false" />
     </van-swipe-item>
   </van-swipe>
 </template>
@@ -21,13 +21,23 @@ export default {
         ]
       })
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.$refs.swipe.resize();
+    }, 0);
   }
 };
 </script>
 
 <style lang="scss" scoped>
-img {
+.swipe {
   width: 100%;
-  object-fit: cover;
+  height: 100%;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 </style>
