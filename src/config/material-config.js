@@ -3,7 +3,7 @@ const materialsList = [
     component: "BvButton",
     name: "按钮",
     layout: {
-      h: 17
+      h: 45
     },
     editData: [
       {
@@ -68,7 +68,7 @@ const materialsList = [
     component: "BvText",
     name: "文本",
     layout: {
-      h: 15
+      h: 50
     },
     editData: [
       {
@@ -109,7 +109,7 @@ const materialsList = [
     component: "BvImage",
     name: "图片",
     layout: {
-      h: 83
+      h: 160
     },
     editData: [
       {
@@ -136,7 +136,7 @@ const materialsList = [
     component: "BvPlaceholder",
     name: "占位符",
     layout: {
-      h: 20
+      h: 45
     },
     editData: [
       {
@@ -153,7 +153,7 @@ const materialsList = [
     component: "BvSwipe",
     name: "轮播图",
     layout: {
-      h: 55
+      h: 160
     },
     editData: [
       {
@@ -178,7 +178,7 @@ const materialsList = [
     component: "BvVideo",
     name: "视频",
     layout: {
-      h: 55
+      h: 160
     },
     editData: [
       {

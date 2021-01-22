@@ -10,7 +10,7 @@
         :is-resizable="true"
         :is-mirrored="false"
         :vertical-compact="true"
-        :margin="[2, 2]"
+        :margin="[0, 0]"
         :use-css-transforms="true"
       >
         <grid-item
@@ -99,6 +99,7 @@ export default {
       &:hover {
         margin: -2px;
         border: 2px solid #006aff;
+        z-index: 1;
       }
       .mask {
         position: absolute;
