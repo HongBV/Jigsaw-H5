@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Renderer from "@/components/page/renderer";
+import Renderer from "@/components/preview/renderer";
 
 export default {
   name: "Page",
