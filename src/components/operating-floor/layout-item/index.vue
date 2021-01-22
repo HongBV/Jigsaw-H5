@@ -1,6 +1,5 @@
 <template>
   <div class="layout-item" @click="editMaterial">
-    <div class="mask"></div>
     <component :is="material.component" :config="material.config"></component>
   </div>
 </template>

@@ -1,4 +1,5 @@
 const materialsList = [
+  // BvButton
   {
     component: "BvButton",
     name: "按钮",
@@ -64,6 +65,7 @@ const materialsList = [
       backgroundColor: "#ffffff"
     }
   },
+  // BvText
   {
     component: "BvText",
     name: "文本",
@@ -105,6 +107,7 @@ const materialsList = [
       color: "#000000"
     }
   },
+  // BvImage
   {
     component: "BvImage",
     name: "图片",
@@ -123,7 +126,7 @@ const materialsList = [
         type: "Number",
         step: 1,
         min: 0,
-        max: 100
+        max: 800
       }
     ],
     config: {
@@ -132,6 +135,7 @@ const materialsList = [
       borderRadius: 0
     }
   },
+  // BvPlaceholder
   {
     component: "BvPlaceholder",
     name: "占位符",
@@ -149,6 +153,7 @@ const materialsList = [
       backgroundColor: "#fafafa"
     }
   },
+  // BvSwipe
   {
     component: "BvSwipe",
     name: "轮播图",
@@ -174,6 +179,7 @@ const materialsList = [
       ]
     }
   },
+  // BvVideo
   {
     component: "BvVideo",
     name: "视频",

@@ -1,13 +1,11 @@
 <template>
-  <el-image
+  <van-image
     class="bv-image"
     :src="config.url"
     :fit="'cover'"
-    :style="{
-      borderRadius: `${config.borderRadius}px`
-    }"
+    :radius="config.borderRadius"
   >
-  </el-image>
+  </van-image>
 </template>
 
 <script>
@@ -29,5 +27,6 @@ export default {
 <style lang="scss" scoped>
 .bv-image {
   width: 100%;
+  height: 100%;
 }
 </style>
