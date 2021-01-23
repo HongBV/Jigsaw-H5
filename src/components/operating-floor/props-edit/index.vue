@@ -17,7 +17,6 @@
           v-if="['Text', 'Color'].includes(editItem.type)"
           class="input"
           v-model="currentMaterial.config[editItem.key]"
-          :label="editItem.name"
           :type="editItem.type"
         ></el-input>
         <el-input-number
@@ -36,6 +35,20 @@
           inactive-color="#ff4949"
         >
         </el-switch>
+        <el-select
+          v-if="editItem.type === 'Select'"
+          class="select"
+          v-model="currentMaterial.config[editItem.key]"
+          size="small"
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="item in editItem.options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
       </div>
     </section>
     <section v-else>
@@ -123,6 +136,9 @@ export default {
           padding: 0 3px;
         }
       }
+    }
+    .select {
+      width: 200px;
     }
   }
   footer {

@@ -2,7 +2,7 @@
   <van-image
     class="bv-image"
     :src="config.url"
-    :fit="'cover'"
+    :fit="config.fit"
     :radius="config.borderRadius"
   >
   </van-image>
@@ -17,6 +17,7 @@ export default {
       default: () => ({
         url:
           "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
+        fit: "cover",
         borderRadius: 0
       })
     }

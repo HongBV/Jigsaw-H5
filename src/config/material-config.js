@@ -127,11 +127,24 @@ const materialsList = [
         step: 1,
         min: 0,
         max: 800
+      },
+      {
+        key: "fit",
+        name: "填充模式",
+        type: "Select",
+        options: [
+          { label: "自适应（不裁剪）", value: "contain" },
+          { label: "自适应（裁剪）", value: "cover" },
+          { label: "拉伸", value: "fill" },
+          { label: "原图", value: "none" },
+          { label: "自适应", value: "scale-down" }
+        ]
       }
     ],
     config: {
       url:
         "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
+      fit: "cover",
       borderRadius: 0
     }
   },
