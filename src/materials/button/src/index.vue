@@ -37,6 +37,8 @@ export default {
 <style lang="scss" scoped>
 .bv-button {
   display: inline-block;
-  margin: 5px 0;
+  height: 100%;
+  padding: 0 20px;
+  min-height: 20px;
 }
 </style>
