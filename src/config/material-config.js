@@ -4,7 +4,7 @@ const materialsList = [
     component: "BvButton",
     name: "按钮",
     layout: {
-      h: 45
+      h: 50
     },
     editData: [
       {
@@ -70,7 +70,7 @@ const materialsList = [
     component: "BvText",
     name: "文本",
     layout: {
-      h: 50
+      h: 45
     },
     editData: [
       {
@@ -204,6 +204,57 @@ const materialsList = [
       url:
         "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm",
       muted: true
+    }
+  },
+  // BvNotoceBar
+  {
+    component: "BvNotoceBar",
+    name: "通知栏",
+    layout: {
+      h: 40
+    },
+    editData: [
+      {
+        key: "text",
+        name: "文本",
+        type: "Text"
+      },
+      {
+        key: "scrollable",
+        name: "滚动播放",
+        type: "Switch"
+      },
+      {
+        key: "wrapable",
+        name: "多行展示",
+        type: "Switch"
+      },
+      {
+        key: "speed",
+        name: "滚动速度",
+        type: "Number",
+        step: 10,
+        min: 10,
+        max: 200
+      },
+      {
+        key: "color",
+        name: "字体色",
+        type: "Color"
+      },
+      {
+        key: "background",
+        name: "背景色",
+        type: "Color"
+      }
+    ],
+    config: {
+      text: "在代码阅读过程中人们说脏话的频率是衡量代码质量的唯一标准。",
+      scrollable: true,
+      wrapable: false,
+      speed: 50,
+      color: "#ff6600",
+      background: "#fff7cc"
     }
   }
 ];
