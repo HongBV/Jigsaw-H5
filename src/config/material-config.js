@@ -53,6 +53,11 @@ const materialsList = [
         key: "backgroundColor",
         name: "背景色",
         type: "Color"
+      },
+      {
+        key: "disabled",
+        name: "禁用",
+        type: "Switch"
       }
     ],
     config: {
@@ -62,7 +67,8 @@ const materialsList = [
       fontSize: 14,
       fontWeight: 400,
       color: "#000000",
-      backgroundColor: "#ffffff"
+      backgroundColor: "#ffffff",
+      disabled: false
     }
   },
   // BvText

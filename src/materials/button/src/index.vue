@@ -1,17 +1,18 @@
 <template>
-  <el-button
+  <van-button
     class="bv-button"
+    :color="config.color"
+    :disabled="config.disabled"
     :style="{
       width: `${config.width}px`,
       borderRadius: `${config.borderRadius}px`,
       fontSize: `${config.fontSize}px`,
       fontWeight: config.fontWeight,
-      color: config.color,
       backgroundColor: config.backgroundColor
     }"
   >
     {{ config.text }}
-  </el-button>
+  </van-button>
 </template>
 
 <script>
@@ -27,7 +28,8 @@ export default {
         fontSize: 14,
         fontWeight: 400,
         color: "#000000",
-        backgroundColor: "#ffffff"
+        backgroundColor: "#ffffff",
+        disabled: false
       })
     }
   }
@@ -37,8 +39,9 @@ export default {
 <style lang="scss" scoped>
 .bv-button {
   display: inline-block;
-  height: 100%;
+  margin: 5px 0;
   padding: 0 20px;
+  height: calc(100% - 10px);
   min-height: 20px;
 }
 </style>
