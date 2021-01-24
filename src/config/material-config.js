@@ -9,20 +9,20 @@ const materialsList = [
     editData: [
       {
         key: "text",
-        name: "文字",
+        name: "按钮文字",
         type: "Text"
       },
       {
         key: "width",
-        name: "宽度",
+        name: "按钮宽度",
         type: "Number",
-        step: 1,
-        min: 80,
+        step: 10,
+        min: 50,
         max: 400
       },
       {
         key: "borderRadius",
-        name: "圆角",
+        name: "按钮圆角",
         type: "Number",
         step: 1,
         min: 0,
@@ -45,18 +45,25 @@ const materialsList = [
         max: 800
       },
       {
-        key: "color",
-        name: "文字颜色",
-        type: "Color"
+        key: "type",
+        name: "按钮类型",
+        type: "Select",
+        options: [
+          { label: "默认按钮", value: "default" },
+          { label: "主要按钮", value: "primary" },
+          { label: "信息按钮", value: "info" },
+          { label: "警告按钮", value: "warning" },
+          { label: "危险按钮", value: "danger" }
+        ]
       },
       {
-        key: "backgroundColor",
-        name: "背景色",
-        type: "Color"
+        key: "plain",
+        name: "朴素按钮",
+        type: "Switch"
       },
       {
         key: "disabled",
-        name: "禁用",
+        name: "禁用按钮",
         type: "Switch"
       }
     ],
@@ -66,8 +73,8 @@ const materialsList = [
       borderRadius: 10,
       fontSize: 14,
       fontWeight: 400,
-      color: "#000000",
-      backgroundColor: "#ffffff",
+      type: "default",
+      plain: false,
       disabled: false
     }
   },
@@ -76,7 +83,7 @@ const materialsList = [
     component: "BvText",
     name: "文本",
     layout: {
-      h: 45
+      h: 47
     },
     editData: [
       {

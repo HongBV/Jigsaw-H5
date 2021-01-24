@@ -1,14 +1,14 @@
 <template>
   <van-button
     class="bv-button"
-    :color="config.color"
+    :type="config.type"
     :disabled="config.disabled"
+    :plain="config.plain"
     :style="{
       width: `${config.width}px`,
       borderRadius: `${config.borderRadius}px`,
       fontSize: `${config.fontSize}px`,
-      fontWeight: config.fontWeight,
-      backgroundColor: config.backgroundColor
+      fontWeight: config.fontWeight
     }"
   >
     {{ config.text }}
@@ -27,8 +27,8 @@ export default {
         borderRadius: 10,
         fontSize: 14,
         fontWeight: 400,
-        color: "#000000",
-        backgroundColor: "#ffffff",
+        type: "default",
+        plain: false,
         disabled: false
       })
     }
@@ -38,9 +38,8 @@ export default {
 
 <style lang="scss" scoped>
 .bv-button {
-  display: inline-block;
   margin: 5px 0;
-  padding: 0 20px;
+  padding: 0 10px;
   height: calc(100% - 10px);
   min-height: 20px;
 }
