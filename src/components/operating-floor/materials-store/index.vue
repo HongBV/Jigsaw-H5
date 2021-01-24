@@ -67,7 +67,8 @@ export default {
         justify-content: center;
         align-items: center;
         padding: 5px;
-        height: 80px;
+        height: 70px;
+        overflow: hidden;
       }
       &__mask {
         position: absolute;
@@ -79,6 +80,7 @@ export default {
       }
       &__name {
         margin: 0;
+        padding: 5px;
         text-align: center;
         font-size: 14px;
         color: #666666;

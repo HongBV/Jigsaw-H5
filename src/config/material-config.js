@@ -282,6 +282,34 @@ const materialsList = [
       color: "#ff6600",
       background: "#fff7cc"
     }
+  },
+  // BvForm
+  {
+    component: "BvForm",
+    name: "表单",
+    layout: {
+      h: 200
+    },
+    editData: [
+      {
+        key: "title",
+        name: "表单标题",
+        type: "Text"
+      }
+    ],
+    config: {
+      title: "表单标题",
+      form: [
+        {
+          label: "姓名",
+          value: ""
+        },
+        {
+          label: "爱好",
+          value: ""
+        }
+      ]
+    }
   }
 ];
 export default materialsList;
