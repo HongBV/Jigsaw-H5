@@ -288,23 +288,30 @@ const materialsList = [
     component: "BvForm",
     name: "表单",
     layout: {
-      h: 200
+      h: 250
     },
     editData: [
       {
         key: "title",
         name: "表单标题",
         type: "Text"
+      },
+      {
+        key: "form",
+        name: "表单控件",
+        type: "Form"
       }
     ],
     config: {
       title: "表单标题",
       form: [
         {
+          type: "text",
           label: "姓名",
           value: ""
         },
         {
+          type: "text",
           label: "爱好",
           value: ""
         }

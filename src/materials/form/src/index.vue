@@ -2,14 +2,41 @@
   <div class="bv-form">
     <h3>{{ config.title }}</h3>
     <van-form @submit="onSubmit">
-      <van-field
-        v-for="(item, index) in config.form"
-        :key="index"
-        v-model="item.value"
-        :name="item.label"
-        :label="item.label"
-        placeholder="请输入"
-      />
+      <template v-for="(item, index) in config.form">
+        <!-- 文本框 -->
+        <van-field
+          v-if="item.type === 'text'"
+          :key="index"
+          :name="item.label"
+          :label="item.label"
+          v-model="item.value"
+          placeholder="请输入"
+        />
+        <!-- 开关 -->
+        <van-field
+          v-if="item.type === 'switch'"
+          :key="index"
+          :name="item.label"
+          :label="item.label"
+        >
+          <template #input>
+            <van-switch v-model="item.value" size="20" />
+          </template>
+        </van-field>
+        <!-- 单选项 -->
+        <van-field
+          v-if="item.type === 'radio'"
+          :key="index"
+          :label="item.label"
+        >
+          <template #input>
+            <van-radio-group v-model="item.value" direction="horizontal">
+              <van-radio name="1">单选框 1</van-radio>
+              <van-radio name="2">单选框 2</van-radio>
+            </van-radio-group>
+          </template>
+        </van-field>
+      </template>
       <van-button round block type="info" native-type="submit">
         提交
       </van-button>
@@ -27,10 +54,12 @@ export default {
         title: "表单示例",
         form: [
           {
+            type: "text",
             label: "姓名",
             value: ""
           },
           {
+            type: "text",
             label: "爱好",
             value: ""
           }

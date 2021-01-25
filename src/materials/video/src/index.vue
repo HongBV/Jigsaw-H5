@@ -29,9 +29,6 @@ export default {
       })
     }
   },
-  mounted() {
-    console.log("this is current player instance object", this.player);
-  },
   computed: {
     player() {
       return this.$refs.videoPlayer.player;

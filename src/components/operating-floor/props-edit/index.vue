@@ -12,7 +12,9 @@
         v-for="(editItem, idx) in currentMaterial.editData"
         :key="idx"
       >
-        <span class="title">{{ editItem.name }}</span>
+        <span class="label" v-if="editItem.type !== 'Form'">
+          {{ editItem.name }}
+        </span>
         <el-input
           v-if="['Text', 'Color'].includes(editItem.type)"
           class="input"
@@ -49,6 +51,10 @@
             :value="item.value"
           />
         </el-select>
+        <form-edit
+          v-if="editItem.type === 'Form'"
+          :form="currentMaterial.config[editItem.key]"
+        />
       </div>
     </section>
     <section v-else>
@@ -67,8 +73,12 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
+import FormEdit from "@/components/operating-floor/form-edit";
 export default {
   name: "PropsEdit",
+  components: {
+    FormEdit
+  },
   computed: {
     ...mapState({
       page: state => state.editor.page,
@@ -84,7 +94,6 @@ export default {
       this.deleteMaterial(this.currentMaterial);
     },
     copyItem() {
-      console.log(this.currentMaterial);
       this.addMaterial({
         ...JSON.parse(JSON.stringify(this.currentMaterial)),
         i: this.page.length
@@ -111,7 +120,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
-    .title {
+    .label {
       width: 60px;
       height: 32px;
       line-height: 32px;
@@ -126,10 +135,6 @@ export default {
         cursor: pointer;
         &[type="Text"] {
           width: 200px;
-        }
-        &[type="Number"] {
-          width: 70px;
-          padding-right: 0;
         }
         &[type="Color"] {
           width: 70px;
