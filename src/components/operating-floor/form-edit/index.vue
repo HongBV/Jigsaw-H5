@@ -19,26 +19,50 @@
         </div>
       </el-popover>
     </header>
-    <div v-for="(item, index) in form" :key="index" class="form-item">
-      <span class="label">{{ getLabel(item) }}</span>
-      <span class="operation">
-        <i class="el-icon-edit-outline" @click="editItem(index)"></i>
-        <i class="el-icon-remove-outline" @click="removeItem(index)"></i>
-      </span>
-    </div>
+    <form-edit-item
+      v-for="(item, idx) in form"
+      :key="idx"
+      :form="form"
+      :formItem="item"
+      :idx="idx"
+    >
+    </form-edit-item>
   </div>
 </template>
 
 <script>
-const typeMap = {
-  text: "文本框",
-  switch: "开关项",
-  radio: "单选项",
-  checkbox: "多选项"
+import FormEditItem from "@/components/operating-floor/form-edit-item";
+// 各表单项默认配置
+const defaultConfig = {
+  text: {
+    label: "文本框",
+    value: "",
+    type: "text"
+  },
+  switch: {
+    label: "开关项",
+    value: "",
+    type: "switch"
+  },
+  radio: {
+    label: "单选项",
+    value: "",
+    type: "radio",
+    options: ["选项1", "选项2"]
+  },
+  checkbox: {
+    label: "多选项",
+    value: [],
+    type: "checkbox",
+    options: ["选项1", "选项2"]
+  }
 };
 
 export default {
   name: "FormEdit",
+  components: {
+    FormEditItem
+  },
   props: {
     form: {
       type: Array,
@@ -46,23 +70,12 @@ export default {
     }
   },
   methods: {
+    /**
+     * 添加一项表单项
+     * @param {string} type
+     */
     addItem(type) {
-      this.form.push({
-        label: typeMap[type],
-        value: "",
-        type
-      });
-    },
-    removeItem(idx) {
-      this.form.splice(idx, 1);
-    },
-    editItem(idx) {
-      this.form.splice(idx, 0);
-    },
-    getLabel(formItem) {
-      const type = typeMap[formItem.type];
-      const label = formItem.label;
-      return `【${type}】${label}`;
+      this.form.push(defaultConfig[type]);
     }
   }
 };
@@ -79,18 +92,10 @@ export default {
       font-weight: 600;
     }
   }
-  .form-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 40px;
-    .operation {
-      & i {
-        margin-left: 10px;
-        display: inline-block;
-        font-size: 18px;
-        cursor: pointer;
-      }
+  .form-edit-item {
+    border-top: 1px solid #cccccc;
+    &:nth-last-child(1) {
+      border-bottom: 1px solid #cccccc;
     }
   }
 }

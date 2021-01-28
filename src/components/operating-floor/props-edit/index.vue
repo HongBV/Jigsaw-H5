@@ -60,13 +60,9 @@
     <section v-else>
       <p>选择组件后即可编辑</p>
     </section>
-    <footer>
-      <el-button @click="copyItem" round type="primary" :disabled="!editable">
-        复 制
-      </el-button>
-      <el-button @click="deleteItem" round type="danger" :disabled="!editable">
-        删 除
-      </el-button>
+    <footer v-if="editable">
+      <el-button @click="copyItem" type="primary" round plain>复 制</el-button>
+      <el-button @click="deleteItem" type="danger" round plain>删 除</el-button>
     </footer>
   </div>
 </template>

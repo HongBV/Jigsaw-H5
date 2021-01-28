@@ -28,12 +28,38 @@
           v-if="item.type === 'radio'"
           :key="index"
           :label="item.label"
+          :name="item.label"
         >
           <template #input>
             <van-radio-group v-model="item.value" direction="horizontal">
-              <van-radio name="1">单选框 1</van-radio>
-              <van-radio name="2">单选框 2</van-radio>
+              <van-radio
+                v-for="option in item.options"
+                :key="option"
+                :name="option"
+              >
+                {{ option }}
+              </van-radio>
             </van-radio-group>
+          </template>
+        </van-field>
+        <!-- 多选项 -->
+        <van-field
+          v-if="item.type === 'checkbox'"
+          :key="index"
+          :name="item.label"
+          :label="item.label"
+        >
+          <template #input>
+            <van-checkbox-group v-model="item.value" direction="horizontal">
+              <van-checkbox
+                v-for="option in item.options"
+                :key="option"
+                :name="option"
+                shape="square"
+              >
+                {{ option }}
+              </van-checkbox>
+            </van-checkbox-group>
           </template>
         </van-field>
       </template>
@@ -86,6 +112,17 @@ export default {
   .van-button {
     margin: 20px 16px 10px;
     width: calc(100% - 32px);
+  }
+  ::v-deep {
+    .van-checkbox,
+    .van-radio {
+      margin: 0 0 5px;
+      min-width: 50%;
+    }
+    .van-radio-group,
+    .van-checkbox-group {
+      width: 100%;
+    }
   }
 }
 </style>
