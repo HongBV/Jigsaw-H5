@@ -7,6 +7,9 @@ const mutations = {
   resetPage(state) {
     state.page = [];
   },
+  resetCurrentMaterial(state) {
+    state.currentMaterial = {};
+  },
   setCurrentMaterial(state, material) {
     state.currentMaterial = material;
   },

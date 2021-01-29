@@ -85,9 +85,10 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["deleteMaterial", "addMaterial"]),
+    ...mapMutations(["deleteMaterial", "addMaterial", "resetCurrentMaterial"]),
     deleteItem() {
       this.deleteMaterial(this.currentMaterial);
+      this.resetCurrentMaterial();
     },
     copyItem() {
       this.addMaterial({
