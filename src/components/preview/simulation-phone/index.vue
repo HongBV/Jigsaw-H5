@@ -1,6 +1,6 @@
 <template>
   <div class="simulation-phone">
-    <div class="viewport">
+    <div class="viewport" id="viewport">
       <renderer :page="page"></renderer>
     </div>
   </div>

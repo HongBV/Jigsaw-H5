@@ -1,7 +1,9 @@
 <template>
   <div class="form-edit-item">
     <template v-if="!editable">
-      <span>{{ formItem.type | filterType }}</span>
+      <el-tag type="info" :disable-transitions="true">
+        {{ formItem.typeName }}
+      </el-tag>
       <span>{{ formItem.label }}</span>
       <span class="operation">
         <i class="el-icon-edit-outline" @click="edit()"></i>
@@ -11,12 +13,12 @@
     <template v-else>
       <div>
         <p>字段名</p>
-        <p v-if="showSelect">选项</p>
+        <p v-if="formItem.options">选项</p>
       </div>
       <div v-show="editable" class="input">
         <el-input v-model="formItem.label" size="mini" />
         <el-select
-          v-if="showSelect"
+          v-if="formItem.options"
           v-model="formItem.options"
           size="mini"
           multiple
@@ -43,13 +45,6 @@
 </template>
 
 <script>
-const typeMap = {
-  text: "文本框",
-  switch: "开关项",
-  radio: "单选项",
-  checkbox: "多选项"
-};
-
 export default {
   name: "FormEditItem",
   props: {
@@ -74,16 +69,6 @@ export default {
       originalName: null,
       originalOptions: null
     };
-  },
-  computed: {
-    showSelect() {
-      return ["checkbox", "radio"].includes(this.formItem.type);
-    }
-  },
-  filters: {
-    filterType(type) {
-      return `【${typeMap[type]}】`;
-    }
   },
   methods: {
     /**

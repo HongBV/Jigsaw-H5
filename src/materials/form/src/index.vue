@@ -62,6 +62,40 @@
             </van-checkbox-group>
           </template>
         </van-field>
+        <!-- 步进器 -->
+        <van-field
+          v-if="item.type === 'stepper'"
+          :key="index"
+          :name="item.label"
+          :label="item.label"
+        >
+          <template #input>
+            <van-stepper v-model="item.value" />
+          </template>
+        </van-field>
+        <!-- 评分 -->
+        <van-field
+          v-if="item.type === 'rate'"
+          :key="index"
+          :name="item.label"
+          :label="item.label"
+        >
+          <template #input>
+            <van-rate v-model="item.value" />
+          </template>
+        </van-field>
+        <!-- 选择器 -->
+        <form-picker
+          v-if="item.type === 'picker'"
+          :key="index"
+          :formItem="item"
+        />
+        <!-- 时间选择器 -->
+        <form-datetime-picker
+          v-if="item.type === 'datetimePicker'"
+          :key="index"
+          :formItem="item"
+        />
       </template>
       <van-button round block type="info" native-type="submit">
         提交
@@ -71,8 +105,11 @@
 </template>
 
 <script>
+import FormPicker from "./components/picker";
+import FormDatetimePicker from "./components/datetime-picker";
 export default {
   name: "BvForm",
+  components: { FormPicker, FormDatetimePicker },
   props: {
     config: {
       type: Object,
@@ -81,11 +118,13 @@ export default {
         form: [
           {
             type: "text",
+            typeName: "文本框",
             label: "姓名",
             value: ""
           },
           {
             type: "text",
+            typeName: "文本框",
             label: "爱好",
             value: ""
           }
@@ -118,6 +157,7 @@ export default {
     .van-radio {
       margin: 0 0 5px;
       min-width: 50%;
+      overflow: auto;
     }
     .van-radio-group,
     .van-checkbox-group {

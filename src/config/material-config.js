@@ -307,11 +307,13 @@ const materialsList = [
       form: [
         {
           type: "text",
+          typeName: "文本框",
           label: "姓名",
           value: ""
         },
         {
           type: "text",
+          typeName: "文本框",
           label: "爱好",
           value: ""
         }

@@ -1,7 +1,12 @@
 <template>
   <div class="layout-edit">
     <toolbar />
-    <div class="viewport" @drop="onDrop($event)" @dragover="onDragover($event)">
+    <div
+      id="viewport"
+      class="viewport"
+      @drop="onDrop($event)"
+      @dragover="onDragover($event)"
+    >
       <grid-layout
         :layout.sync="page"
         :col-num="24"
