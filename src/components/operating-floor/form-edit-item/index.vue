@@ -12,8 +12,8 @@
     </template>
     <template v-else>
       <div>
-        <p>字段名</p>
-        <p v-if="formItem.options">选项</p>
+        <el-tag size="medium">字段名</el-tag>
+        <el-tag v-if="formItem.options" size="medium">可选项</el-tag>
       </div>
       <div v-show="editable" class="input">
         <el-input v-model="formItem.label" size="mini" />
@@ -118,15 +118,22 @@ export default {
       margin-left: 10px;
       display: inline-block;
       font-size: 18px;
+      color: #909399;
       cursor: pointer;
     }
   }
   .input {
     width: calc(100% - 140px);
   }
-  .el-input {
+  .el-input,
+  .el-select {
+    display: block;
     margin: 5px 0;
     width: 100%;
+  }
+  .el-tag {
+    display: block;
+    margin: 5px 0;
   }
 }
 </style>

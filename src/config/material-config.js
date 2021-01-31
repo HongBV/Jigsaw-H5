@@ -297,6 +297,16 @@ const materialsList = [
         type: "Text"
       },
       {
+        key: "btnText",
+        name: "按钮文案",
+        type: "Text"
+      },
+      {
+        key: "targetHost",
+        name: "提交地址",
+        type: "Text"
+      },
+      {
         key: "form",
         name: "表单控件",
         type: "Form"
@@ -304,6 +314,8 @@ const materialsList = [
     ],
     config: {
       title: "表单标题",
+      btnText: "提交",
+      targetHost: "",
       form: [
         {
           type: "text",

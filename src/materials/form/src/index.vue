@@ -98,7 +98,7 @@
         />
       </template>
       <van-button round block type="info" native-type="submit">
-        提交
+        {{ config.btnText }}
       </van-button>
     </van-form>
   </div>
@@ -115,6 +115,8 @@ export default {
       type: Object,
       default: () => ({
         title: "表单示例",
+        btnText: "提交",
+        targetHost: "",
         form: [
           {
             type: "text",
