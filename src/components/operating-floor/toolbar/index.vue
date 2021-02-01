@@ -1,30 +1,23 @@
 <template>
   <div class="toolbar">
-    <el-tooltip content="全屏" placement="bottom">
-      <div class="toolbar__item" @click="toggleFullScreen">
-        <i class="el-icon-full-screen"></i>
-      </div>
-    </el-tooltip>
-    <el-tooltip content="保存" placement="bottom">
-      <div class="toolbar__item" @click="savePage">
-        <i class="el-icon-folder-checked"></i>
-      </div>
-    </el-tooltip>
-    <el-tooltip content="预览" placement="bottom">
-      <div class="toolbar__item" @click="preview">
-        <i class="el-icon-mobile-phone"></i>
-      </div>
-    </el-tooltip>
-    <el-tooltip content="新建页面" placement="bottom">
-      <div class="toolbar__item">
-        <i class="el-icon-folder-add"></i>
-      </div>
-    </el-tooltip>
-    <el-tooltip content="清空页面" placement="bottom">
-      <div class="toolbar__item" @click="clearPage">
-        <i class="el-icon-delete"></i>
-      </div>
-    </el-tooltip>
+    <div class="toolbar__item" @click="toggleFullScreen">
+      <i class="el-icon-full-screen"></i>
+    </div>
+    <div class="toolbar__item" @click="savePage">
+      <i class="el-icon-folder-checked"></i>
+    </div>
+    <div class="toolbar__item" @click="preview">
+      <i class="el-icon-mobile-phone"></i>
+    </div>
+    <div class="toolbar__item" @click="addNewPage">
+      <i class="el-icon-copy-document"></i>
+    </div>
+    <div class="toolbar__item" @click="clearPage">
+      <i class="el-icon-delete"></i>
+    </div>
+    <div class="toolbar__item" @click="showHelpTip">
+      <i class="el-icon-magic-stick"></i>
+    </div>
   </div>
 </template>
 
@@ -73,30 +66,35 @@ export default {
         document.webkitExitFullscreen();
       }
     },
-    // 预览
-    preview() {
-      this.$router.push({ name: "Preview" });
-    },
     // 保存页面
     savePage() {
       localStorage.setItem("page", JSON.stringify(this.page));
       this.$message({
         message: "保存成功",
-        type: "success"
+        type: "success",
+        duration: 800
       });
     },
+    // 预览
+    preview() {
+      this.$router.push({ name: "Preview" });
+    },
+    // 新建页面
+    addNewPage() {},
     // 清空页面
     clearPage() {
       this.resetPage();
       this.resetCurrentMaterial();
-    }
+    },
+    // 展示帮助提示
+    showHelpTip() {}
   }
 };
 </script>
 
 <style scoped lang="scss">
 .toolbar {
-  position: fixed;
+  position: absolute;
   top: 10px;
   left: 50%;
   display: flex;
@@ -110,6 +108,9 @@ export default {
     width: 40px;
     text-align: center;
     cursor: pointer;
+    &:hover {
+      color: rgb(47, 84, 235);
+    }
   }
 }
 </style>

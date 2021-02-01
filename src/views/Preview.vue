@@ -26,6 +26,8 @@
 
 <script>
 import SimulationPhone from "@/components/preview/simulation-phone";
+import domtoimage from "dom-to-image";
+import { saveAs } from 'file-saver';
 import { mapState } from "vuex";
 
 export default {
@@ -43,6 +45,10 @@ export default {
       this.$router.push({ name: "OperatingFloor" });
     },
     publish() {
+      const node = document.getElementById("page");
+      domtoimage.toBlob(node).then(function(blob) {
+        saveAs(blob, "my-poster.png");
+      });
       // todo: 待后端接口实现
     }
   }

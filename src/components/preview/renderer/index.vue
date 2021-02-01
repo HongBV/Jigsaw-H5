@@ -1,5 +1,6 @@
 <template>
   <grid-layout
+    id="page"
     :layout.sync="page"
     :col-num="24"
     :row-height="1"

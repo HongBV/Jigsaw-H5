@@ -1,36 +1,39 @@
 <template>
   <div class="layout-edit">
+    <i class="el-icon-back go-back" @click="goBack"></i>
     <toolbar />
-    <div
-      id="viewport"
-      class="viewport"
-      @drop="onDrop($event)"
-      @dragover="onDragover($event)"
-    >
-      <grid-layout
-        :layout.sync="page"
-        :col-num="24"
-        :row-height="1"
-        :is-draggable="true"
-        :is-resizable="true"
-        :is-mirrored="false"
-        :vertical-compact="true"
-        :margin="[0, 0]"
-        :use-css-transforms="true"
+    <div class="viewport-wrapper">
+      <div
+        id="viewport"
+        class="viewport"
+        @drop="onDrop($event)"
+        @dragover="onDragover($event)"
       >
-        <grid-item
-          class="item"
-          v-for="item in page"
-          :x="item.x"
-          :y="item.y"
-          :w="item.w"
-          :h="item.h"
-          :i="item.i"
-          :key="item.i"
+        <grid-layout
+          :layout.sync="page"
+          :col-num="24"
+          :row-height="1"
+          :is-draggable="true"
+          :is-resizable="true"
+          :is-mirrored="false"
+          :vertical-compact="true"
+          :margin="[0, 0]"
+          :use-css-transforms="true"
         >
-          <layout-item :material="item" />
-        </grid-item>
-      </grid-layout>
+          <grid-item
+            class="item"
+            v-for="item in page"
+            :x="item.x"
+            :y="item.y"
+            :w="item.w"
+            :h="item.h"
+            :i="item.i"
+            :key="item.i"
+          >
+            <layout-item :material="item" />
+          </grid-item>
+        </grid-layout>
+      </div>
     </div>
   </div>
 </template>
@@ -59,6 +62,9 @@ export default {
   },
   methods: {
     ...mapMutations(["addMaterial"]),
+    goBack() {
+      this.$router.push({ name: "Login" });
+    },
     onDragover(e) {
       e.preventDefault();
     },
@@ -90,33 +96,55 @@ export default {
 .layout-edit {
   position: relative;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f5f5f5;
-  .viewport {
-    width: 375px;
-    min-height: 667px;
-    background-color: #fafafa;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-    .item {
-      position: relative;
-      overflow: hidden;
-      touch-action: none;
-      box-sizing: border-box;
-      border: 2px solid transparent;
-      &:hover {
-        padding: 0;
-        border: 2px solid #006aff;
-        z-index: 1;
-      }
-      .mask {
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        opacity: 1;
+  .go-back {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    z-index: 10;
+    &:hover {
+      color: rgb(47, 84, 235);
+    }
+  }
+  .viewport-wrapper {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    .viewport {
+      width: 375px;
+      min-height: 667px;
+      background-color: #fafafa;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+      .item {
+        position: relative;
+        overflow: hidden;
+        touch-action: none;
+        box-sizing: border-box;
+        border: 2px solid transparent;
+        &:hover {
+          padding: 0;
+          border: 2px solid #006aff;
+          z-index: 1;
+        }
+        .mask {
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 100%;
+          opacity: 1;
+        }
       }
     }
   }
