@@ -27,7 +27,7 @@
 <script>
 import SimulationPhone from "@/components/preview/simulation-phone";
 import domtoimage from "dom-to-image";
-import { saveAs } from 'file-saver';
+import { saveAs } from "file-saver";
 import { mapState } from "vuex";
 
 export default {
