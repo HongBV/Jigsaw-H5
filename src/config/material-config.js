@@ -331,6 +331,24 @@ const materialsList = [
         }
       ]
     }
+  },
+  // BvQrcode
+  {
+    component: "BvQrcode",
+    name: "二维码",
+    layout: {
+      h: 80
+    },
+    editData: [
+      {
+        key: "url",
+        name: "信息",
+        type: "Text"
+      }
+    ],
+    config: {
+      url: "https://www.baidu.com"
+    }
   }
 ];
 export default materialsList;

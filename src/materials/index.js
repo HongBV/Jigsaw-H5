@@ -10,6 +10,7 @@ import BvSwipe from "./swipe";
 import BvVideo from "./video";
 import BvNotoceBar from "./notice-bar";
 import BvForm from "./form";
+import BvQrcode from "./qrcode";
 
 // 所有组件列表
 const components = [
@@ -20,7 +21,8 @@ const components = [
   BvSwipe,
   BvVideo,
   BvNotoceBar,
-  BvForm
+  BvForm,
+  BvQrcode
 ];
 // 定义 install 方法，接收 Vue 作为参数
 const install = function(Vue) {
@@ -50,6 +52,7 @@ export {
   BvVideo,
   BvNotoceBar,
   BvForm,
+  BvQrcode,
   _register_components_object
 };
 
