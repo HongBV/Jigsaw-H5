@@ -131,7 +131,7 @@ export default {
         line-height: 30px;
         cursor: pointer;
         &[type="Text"] {
-          width: 200px;
+          width: 180px;
         }
         &[type="Color"] {
           width: 70px;
@@ -140,7 +140,7 @@ export default {
       }
     }
     .select {
-      width: 200px;
+      width: 180px;
     }
   }
   footer {
