@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { _register_components_object } from "@/materials/index.js";
+import { _register_components_object } from "@/components/materials/index.js";
 import { mapMutations } from "vuex";
 export default {
   name: "LayoutItem",

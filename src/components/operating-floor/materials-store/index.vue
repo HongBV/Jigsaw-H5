@@ -21,7 +21,7 @@
 
 <script>
 import materialsList from "@/config/material-config.js";
-import { _register_components_object } from "@/materials/index.js";
+import { _register_components_object } from "@/components/materials/index.js";
 export default {
   name: "MaterialsStore",
   components: { ..._register_components_object },
