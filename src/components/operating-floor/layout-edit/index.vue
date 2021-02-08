@@ -80,7 +80,7 @@ export default {
         i: this.page.length,
         x: 0,
         y: this.maxHeight,
-        w: 24,
+        w: layout.w || 24,
         h: layout.h || 20,
         component,
         name,

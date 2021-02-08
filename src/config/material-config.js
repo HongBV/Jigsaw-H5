@@ -349,6 +349,47 @@ const materialsList = [
     config: {
       url: "https://www.baidu.com"
     }
+  },
+  // BvIcon
+  {
+    component: "BvIcon",
+    name: "图标",
+    layout: {
+      h: 60,
+      w: 4
+    },
+    editData: [
+      {
+        key: "size",
+        name: "图标大小",
+        type: "Number",
+        min: 12,
+        max: 48
+      },
+      {
+        key: "text",
+        name: "文案",
+        type: "Text"
+      },
+      {
+        key: "textSize",
+        name: "文案大小",
+        type: "Number",
+        min: 12,
+        max: 24
+      },
+      {
+        key: "type",
+        name: "图标",
+        type: "Icon"
+      }
+    ],
+    config: {
+      type: "el-icon-edit",
+      size: 24,
+      text: "图标",
+      textSize: 12
+    }
   }
 ];
 export default materialsList;

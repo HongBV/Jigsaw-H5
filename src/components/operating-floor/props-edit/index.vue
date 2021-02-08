@@ -12,7 +12,7 @@
         v-for="(editItem, idx) in currentMaterial.editData"
         :key="idx"
       >
-        <span class="label" v-if="editItem.type !== 'Form'">
+        <span class="label" v-if="!['Form', 'Icon'].includes(editItem.type)">
           {{ editItem.name }}
         </span>
         <el-input
@@ -55,6 +55,11 @@
           v-if="editItem.type === 'Form'"
           :form="currentMaterial.config[editItem.key]"
         />
+        <icon-select
+          v-if="editItem.type === 'Icon'"
+          :icon="currentMaterial.config[editItem.key]"
+          @modifyProp="val => modifyProp(editItem.key, val)"
+        />
       </div>
     </section>
     <section v-else>
@@ -70,10 +75,12 @@
 <script>
 import { mapState, mapMutations } from "vuex";
 import FormEdit from "@/components/operating-floor/form-edit";
+import IconSelect from "@/components/operating-floor/icon-select";
 export default {
   name: "PropsEdit",
   components: {
-    FormEdit
+    FormEdit,
+    IconSelect
   },
   computed: {
     ...mapState({
@@ -95,6 +102,9 @@ export default {
         ...JSON.parse(JSON.stringify(this.currentMaterial)),
         i: this.page.length
       });
+    },
+    modifyProp(prop, value) {
+      this.currentMaterial.config[prop] = value;
     }
   }
 };
