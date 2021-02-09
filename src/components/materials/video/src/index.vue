@@ -43,8 +43,8 @@ export default {
             type: "video/mp4",
             src: this.config.url
           }
-        ],
-        poster: "/static/images/author.jpg"
+        ]
+        // poster: "/static/images/author.jpg"
       };
     }
   }

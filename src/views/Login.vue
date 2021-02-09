@@ -7,27 +7,73 @@
     <main class="login__main">
       <form class="form">
         <p class="title">登 录</p>
-        <el-input class="account" v-model="account" clearable></el-input>
-        <el-input class="password" v-model="password" show-password></el-input>
+        <el-input
+          class="account"
+          ref="account"
+          v-model="userInfo.account"
+          clearable
+        />
+        <el-input
+          class="password"
+          ref="password"
+          v-model="userInfo.password"
+          show-password
+        />
         <p class="forget-pwd">忘记密码?</p>
-        <button class="submit-btn" type="button" @click="login">确 认</button>
+        <button class="submit-btn" type="button" @click="handleSubmit">
+          确 认
+        </button>
       </form>
     </main>
   </div>
 </template>
 
 <script>
+import { login } from "@/api/user";
+import { debounce } from "lodash";
 export default {
   name: "Login",
   data() {
     return {
-      account: "",
-      password: ""
+      userInfo: {
+        account: "",
+        password: ""
+      }
     };
   },
+  created() {
+    // 防抖处理
+    this.handleSubmit = debounce(this.handleSubmit, 1000, { leading: true });
+  },
   methods: {
-    login() {
-      this.$router.push({ name: "OperatingFloor" });
+    /**
+     * 用户登录
+     */
+    async handleSubmit() {
+      if (!this.checkField()) return;
+      const { data } = await login(this.userInfo);
+      if (data.success) {
+        this.$router.push({ name: "OperatingFloor" });
+      } else {
+        this.$message.error(data.message);
+      }
+    },
+    /**
+     * 验证字段
+     */
+    checkField() {
+      const { account, password } = this.userInfo;
+      if (!account) {
+        this.$message.error("账号不能为空");
+        this.$refs.account.focus();
+        return false;
+      }
+      if (!password) {
+        this.$message.error("密码不能为空");
+        this.$refs.password.focus();
+        return false;
+      }
+      return true;
     }
   }
 };
