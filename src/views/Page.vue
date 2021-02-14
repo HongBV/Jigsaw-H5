@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { getPageById } from "@/api/page";
 import Renderer from "@/components/preview/renderer";
 
 export default {
@@ -37,13 +38,17 @@ export default {
     },
     /**
      * 获取页面数据
-     * @todo 待后端接口实现后补充
      */
-    async fetchPage() {}
+    async fetchPage() {
+      const id = this.$route.query.id;
+      if (!id) return;
+      const { data } = await getPageById(id);
+      this.page = JSON.parse(data.page);
+    }
   },
   created() {
     this.ua = this.getUA();
-    this.getPage();
+    this.fetchPage();
   }
 };
 </script>
