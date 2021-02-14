@@ -108,9 +108,7 @@ export default {
       width: 400px;
       border-radius: 20px;
       transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-      &:hover {
-        box-shadow: 0 2px 12px 0 rgba(47, 84, 235, 0.1);
-      }
+      box-shadow: 0 2px 12px 0 rgba(47, 84, 235, 0.1);
       .title {
         margin: 0;
         margin-bottom: 36px;
@@ -119,6 +117,7 @@ export default {
         font-weight: 500;
         letter-spacing: 5px;
         text-align: center;
+        user-select: none;
       }
       .account,
       .password {
