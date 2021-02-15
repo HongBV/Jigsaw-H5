@@ -1,5 +1,5 @@
 <template>
-  <img class="bv-qrcode" :src="this.base64" />
+  <img class="bv-qrcode" :src="base64" />
 </template>
 
 <script>
