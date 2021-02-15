@@ -72,7 +72,7 @@ export default {
           type: "success",
           duration: 1000
         });
-        this.$router.push({ name: "OperatingFloor" });
+        this.$router.push({ name: "Login" });
       } else {
         this.$message.error(data.message);
       }
