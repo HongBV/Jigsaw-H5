@@ -22,6 +22,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "Login" */ "@/views/Login.vue")
   },
   {
+    path: "/register",
+    name: "Register",
+    component: () =>
+      import(/* webpackChunkName: "Register" */ "@/views/Register.vue")
+  },
+  {
     path: "/preview",
     name: "Preview",
     component: () =>
@@ -36,6 +42,12 @@ const routes = [
 
 const router = new VueRouter({
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = sessionStorage.getItem("isAuthenticated");
+  if (isAuthenticated || ["Login", "Register"].includes(to.name)) next();
+  else next({ name: "Login" });
 });
 
 export default router;

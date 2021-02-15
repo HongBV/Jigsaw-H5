@@ -1,28 +1,36 @@
 <template>
-  <div class="login">
-    <header class="login__header">
+  <div class="register">
+    <header class="register__header">
       <h1>🌌 Jigsaw H5</h1>
       <div>
-        <span @click="register">去注册</span>
+        <span @click="login">去登录</span>
         <span>去官网</span>
       </div>
     </header>
-    <main class="login__main">
+    <main class="register__main">
       <form class="form">
-        <p class="title">登 录</p>
+        <p class="title">注 册</p>
         <el-input
           class="account"
           ref="account"
           v-model="userInfo.account"
+          placeholder="账号"
           clearable
         />
         <el-input
           class="password"
           ref="password"
           v-model="userInfo.password"
+          placeholder="密码"
           show-password
         />
-        <p class="forget-pwd">忘记密码?</p>
+        <el-input
+          class="password"
+          ref="repeatPassword"
+          v-model="repeatPassword"
+          placeholder="再次输入密码"
+          show-password
+        />
         <button class="submit-btn" type="button" @click="handleSubmit">
           确 认
         </button>
@@ -32,19 +40,18 @@
 </template>
 
 <script>
-import { login } from "@/api/user";
+import { register } from "@/api/user";
 import { debounce } from "lodash";
-
 const CryptoJS = require("crypto-js");
-
 export default {
-  name: "Login",
+  name: "Register",
   data() {
     return {
       userInfo: {
         account: "",
         password: ""
-      }
+      },
+      repeatPassword: ""
     };
   },
   created() {
@@ -53,16 +60,15 @@ export default {
   },
   methods: {
     /**
-     * 用户登录
+     * 用户注册
      */
     async handleSubmit() {
       if (!this.checkField()) return;
-      const userInfo = this.encryptUserInfo(this.userInfo);
-      const { data } = await login(userInfo);
+      const userInfo = this.encryptUserInfo();
+      const { data } = await register(userInfo);
       if (data.success) {
-        sessionStorage.setItem("isAuthenticated", true);
         this.$message({
-          message: "登录成功",
+          message: "注册成功",
           type: "success",
           duration: 1000
         });
@@ -75,7 +81,10 @@ export default {
      * 验证字段
      */
     checkField() {
-      const { account, password } = this.userInfo;
+      const {
+        userInfo: { account, password },
+        repeatPassword
+      } = this;
       if (!account) {
         this.$message.error("账号不能为空");
         this.$refs.account.focus();
@@ -86,27 +95,34 @@ export default {
         this.$refs.password.focus();
         return false;
       }
+      if (!repeatPassword) {
+        this.$message.error("请再输入一次密码");
+        this.$refs.repeatPassword.focus();
+        return false;
+      }
+      if (password !== repeatPassword) {
+        this.$message.error("两次输入的密码不一致");
+        this.$refs.repeatPassword.focus();
+        return false;
+      }
       return true;
     },
     /**
      * 将用户信息加密
-     * @param {object} userInfo 用户信息
-     * @param {string} userInfo.account 账号
-     * @param {string} userInfo.password 密码
      */
-    encryptUserInfo(userInfo) {
-      let { account, password } = userInfo;
+    encryptUserInfo() {
+      let { account, password } = this.userInfo;
       password = CryptoJS.AES.encrypt(password, "jigsaw-h5").toString();
       return { account, password };
     },
-    register() {
-      this.$router.push({ name: "Register" });
+    login() {
+      this.$router.push({ name: "Login" });
     }
   }
 };
 </script>
 <style scoped lang="scss">
-.login {
+.register {
   width: 100vw;
   height: 100vh;
   display: flex;
