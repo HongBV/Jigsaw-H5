@@ -31,6 +31,9 @@
 <script>
 import { login } from "@/api/user";
 import { debounce } from "lodash";
+
+const CryptoJS = require("crypto-js");
+
 export default {
   name: "Login",
   data() {
@@ -51,7 +54,8 @@ export default {
      */
     async handleSubmit() {
       if (!this.checkField()) return;
-      const { data } = await login(this.userInfo);
+      const userInfo = this.encryptUserInfo(this.userInfo);
+      const { data } = await login(userInfo);
       if (data.success) {
         this.$router.push({ name: "OperatingFloor" });
       } else {
@@ -74,6 +78,17 @@ export default {
         return false;
       }
       return true;
+    },
+    /**
+     * 将用户信息加密
+     * @param {object} userInfo 用户信息
+     * @param {string} userInfo.account 账号
+     * @param {string} userInfo.password 密码
+     */
+    encryptUserInfo(userInfo) {
+      let { account, password } = userInfo;
+      password = CryptoJS.AES.encrypt(password, "jigsaw-h5").toString();
+      return { account, password };
     }
   }
 };
