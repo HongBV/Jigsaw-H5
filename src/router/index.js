@@ -46,7 +46,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const isAuthenticated = sessionStorage.getItem("isAuthenticated");
-  if (isAuthenticated || ["Login", "Register"].includes(to.name)) next();
+  const ignoreRoutes = ["Login", "Register", "Page"];
+  if (isAuthenticated || ignoreRoutes.includes(to.name)) next();
   else next({ name: "Login" });
 });
 
