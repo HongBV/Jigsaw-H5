@@ -9,12 +9,8 @@
           <el-button @click="publish" type="success" round>发 布</el-button>
         </div>
         <div class="scan-qrcode">
-          <p class="tip">手机扫码可预览实际效果</p>
-          <el-image class="qrcode">
-            <div slot="error" class="image-slot">
-              <i class="el-icon-picture-outline"></i>
-            </div>
-          </el-image>
+          <p class="tip">🔖 手机扫码体验一下</p>
+          <img class="qrcode" :src="qrcode" draggable="false" />
         </div>
       </div>
     </section>
@@ -28,6 +24,7 @@
 import SimulationPhone from "@/components/preview/simulation-phone";
 import { createPage } from "@/api/page";
 import domtoimage from "dom-to-image";
+import QRCode from "qrcode";
 import { saveAs } from "file-saver";
 import { mapState } from "vuex";
 
@@ -36,20 +33,52 @@ export default {
   components: {
     SimulationPhone
   },
+  data() {
+    return {
+      qrcode: null
+    };
+  },
   computed: {
     ...mapState({
       page: state => state.editor.page
     })
   },
+  created() {
+    this.generateQR();
+  },
   methods: {
+    /**
+     * 返回操作页
+     */
     goback() {
       this.$router.push({ name: "OperatingFloor" });
     },
+    /**
+     * 发布页面
+     */
     async publish() {
       const node = document.getElementById("page");
       domtoimage.toBlob(node).then(blob => saveAs(blob, "my-poster.png"));
       const { data } = await createPage({ page: this.page });
       console.log(data);
+    },
+    /**
+     * 生成二维码
+     */
+    async generateQR() {
+      try {
+        this.qrcode = await QRCode.toDataURL(
+          "http://192.168.31.68:8080/#/page?id=3",
+          {
+            color: {
+              dark: "#000000",
+              light: "#f7f8fa"
+            }
+          }
+        );
+      } catch (err) {
+        this.$message.error("二维码生成失败");
+      }
     }
   }
 };
@@ -102,15 +131,6 @@ export default {
             margin: 0 auto;
             height: 150px;
             width: 150px;
-            ::v-deep.image-slot {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              height: 100%;
-              width: 100%;
-              background: #dddddd;
-              color: #909399;
-            }
           }
         }
       }
