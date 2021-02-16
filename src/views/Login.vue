@@ -14,12 +14,14 @@
           class="account"
           ref="account"
           v-model="userInfo.account"
+          placeholder="账号"
           clearable
         />
         <el-input
           class="password"
           ref="password"
           v-model="userInfo.password"
+          placeholder="密码"
           show-password
         />
         <p class="forget-pwd">忘记密码?</p>
