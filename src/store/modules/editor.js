@@ -1,6 +1,6 @@
 const state = {
   pageId: null,
-  page: JSON.parse(localStorage.getItem("page") || "[]"),
+  page: [],
   currentMaterial: {}
 };
 const actions = {};

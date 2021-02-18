@@ -23,11 +23,13 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
+import { updatePage } from "@/api/page";
 export default {
   name: "PropsEdit",
   computed: {
     ...mapState({
-      page: state => state.editor.page
+      page: state => state.editor.page,
+      pageId: state => state.editor.pageId
     })
   },
   methods: {
@@ -67,8 +69,11 @@ export default {
       }
     },
     // 保存页面
-    savePage() {
-      localStorage.setItem("page", JSON.stringify(this.page));
+    async savePage() {
+      const data = await updatePage(this.pageId, { page: this.page }).then(
+        res => res.data
+      );
+      if (!data) return;
       this.$message({
         message: "保存成功",
         type: "success",
