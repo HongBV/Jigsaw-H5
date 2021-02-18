@@ -80,7 +80,7 @@ export default {
           break;
         case "exit":
           this.$router.push({ name: "Login" });
-          sessionStorage.setItem("isAuthenticated", false);
+          sessionStorage.removeItem("isAuthenticated");
           break;
       }
     },
