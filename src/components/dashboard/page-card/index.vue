@@ -9,8 +9,8 @@
       >
         <span class="dropdown"><i class="el-icon-more"></i></span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="modifyName">修改名称</el-dropdown-item>
-          <el-dropdown-item command="deletePage">删除页面</el-dropdown-item>
+          <el-dropdown-item command="modifyName">改名</el-dropdown-item>
+          <el-dropdown-item command="deletePage">删除</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </header>
