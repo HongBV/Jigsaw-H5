@@ -6,7 +6,9 @@
         <p class="slogan">让页面搭建如拼凑拼图般简单</p>
         <div class="btn-group">
           <el-button @click="goback" type="info" round>返 回</el-button>
-          <el-button @click="publish" type="success" round>发 布</el-button>
+          <el-button @click="generatePoster" type="success" round>
+            生成海报
+          </el-button>
         </div>
         <div class="scan-qrcode">
           <p class="tip">🔖 手机扫码体验一下</p>
@@ -39,7 +41,8 @@ export default {
   },
   computed: {
     ...mapState({
-      page: state => state.editor.page
+      page: state => state.editor.page,
+      pageId: state => state.editor.pageId
     })
   },
   created() {
@@ -53,9 +56,9 @@ export default {
       this.$router.push({ name: "OperatingFloor" });
     },
     /**
-     * 发布页面
+     * 生成海报
      */
-    async publish() {
+    async generatePoster() {
       const node = document.getElementById("page");
       domtoimage.toBlob(node).then(blob => saveAs(blob, "my-poster.png"));
     },
@@ -63,16 +66,10 @@ export default {
      * 生成二维码
      */
     async generateQR() {
+      const url = `http://192.168.31.68:8080/#/page?id=${this.pageId}`;
+      const options = { color: { dark: "#000000", light: "#f7f8fa" } };
       try {
-        this.qrcode = await QRCode.toDataURL(
-          "http://192.168.31.68:8080/#/page?id=3",
-          {
-            color: {
-              dark: "#000000",
-              light: "#f7f8fa"
-            }
-          }
-        );
+        this.qrcode = await QRCode.toDataURL(url, options);
       } catch (err) {
         this.$message.error("二维码生成失败");
       }
