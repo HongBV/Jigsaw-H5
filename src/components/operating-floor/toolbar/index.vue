@@ -31,7 +31,7 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(["resetPage", "resetCurrentMaterial"]),
+    ...mapMutations(["setPage", "resetCurrentMaterial"]),
     // 切换全屏状态
     toggleFullScreen() {
       const isFull = !!(
@@ -83,7 +83,7 @@ export default {
     addNewPage() {},
     // 清空页面
     clearPage() {
-      this.resetPage();
+      this.setPage([]);
       this.resetCurrentMaterial();
     },
     // 展示帮助提示

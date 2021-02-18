@@ -1,11 +1,18 @@
 const state = {
+  pageId: null,
   page: JSON.parse(localStorage.getItem("page") || "[]"),
   currentMaterial: {}
 };
 const actions = {};
 const mutations = {
-  resetPage(state) {
-    state.page = [];
+  setPage(state, page) {
+    state.page = page;
+  },
+  addMaterial(state, material) {
+    state.page.push(material);
+  },
+  deleteMaterial(state, material) {
+    state.page = state.page.filter(item => item !== material);
   },
   resetCurrentMaterial(state) {
     state.currentMaterial = {};
@@ -13,11 +20,8 @@ const mutations = {
   setCurrentMaterial(state, material) {
     state.currentMaterial = material;
   },
-  addMaterial(state, material) {
-    state.page.push(material);
-  },
-  deleteMaterial(state, material) {
-    state.page = state.page.filter(item => item !== material);
+  setPageId(state, pageId) {
+    state.pageId = pageId;
   }
 };
 

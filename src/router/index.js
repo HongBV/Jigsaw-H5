@@ -9,6 +9,12 @@ const routes = [
     redirect: "/operating-floor"
   },
   {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: () =>
+      import(/* webpackChunkName: "OperatingFloor" */ "@/views/Dashboard.vue")
+  },
+  {
     path: "/operating-floor",
     name: "OperatingFloor",
     component: () =>

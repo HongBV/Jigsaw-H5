@@ -63,7 +63,7 @@ export default {
   methods: {
     ...mapMutations(["addMaterial"]),
     goBack() {
-      this.$router.push({ name: "Login" });
+      this.$router.push({ name: "Dashboard" });
     },
     onDragover(e) {
       e.preventDefault();

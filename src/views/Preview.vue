@@ -22,7 +22,6 @@
 
 <script>
 import SimulationPhone from "@/components/preview/simulation-phone";
-import { createPage } from "@/api/page";
 import domtoimage from "dom-to-image";
 import QRCode from "qrcode";
 import { saveAs } from "file-saver";
@@ -59,8 +58,6 @@ export default {
     async publish() {
       const node = document.getElementById("page");
       domtoimage.toBlob(node).then(blob => saveAs(blob, "my-poster.png"));
-      const { data } = await createPage({ page: this.page });
-      console.log(data);
     },
     /**
      * 生成二维码
