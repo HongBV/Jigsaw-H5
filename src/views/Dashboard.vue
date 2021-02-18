@@ -156,6 +156,9 @@ $blue: #2f55eb;
       align-items: center;
       .filter-search {
         width: 260px;
+        .el-input__inner:focus {
+          border-color: $blue;
+        }
       }
       .user {
         width: 50px;
