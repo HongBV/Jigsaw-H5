@@ -2,11 +2,7 @@
   <div class="page-card">
     <header class="header">
       <p class="name">{{ page.name }}</p>
-      <el-dropdown
-        size="small"
-        @command="handleDropdownCommand"
-        placement="bottom"
-      >
+      <el-dropdown size="small" @command="handleDropdownCommand">
         <span class="dropdown"><i class="el-icon-more"></i></span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="modifyName">改名</el-dropdown-item>

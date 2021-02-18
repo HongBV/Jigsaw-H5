@@ -21,7 +21,7 @@
         >
         </el-input>
         <div>
-          <el-dropdown @command="handleDropdownCommand">
+          <el-dropdown @command="handleDropdownCommand" placement="bottom">
             <div class="user">Hong</div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="center">个人中心</el-dropdown-item>
