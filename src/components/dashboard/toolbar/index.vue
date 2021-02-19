@@ -47,20 +47,22 @@ export default {
 
 <style lang="scss">
 $blue: #2f55eb;
-.toolbar {
-  display: flex;
-  &__item {
-    margin: 0 10px;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    border-radius: 50%;
-    text-align: center;
-    font-size: 24px;
-    color: $blue;
-    background-color: #ffffff;
-    box-shadow: 0 0 8px rgb(0, 0, 0, 0.1);
-    cursor: pointer;
+.dashboard {
+  .toolbar {
+    display: flex;
+    &__item {
+      margin: 0 10px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 24px;
+      color: $blue;
+      background-color: #ffffff;
+      box-shadow: 0 0 8px rgb(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
   }
 }
 </style>
