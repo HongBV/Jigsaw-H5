@@ -5,8 +5,13 @@
       <el-dropdown size="small" @command="handleDropdownCommand">
         <span class="dropdown"><i class="el-icon-more"></i></span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="modifyName">改名</el-dropdown-item>
-          <el-dropdown-item command="deletePage">删除</el-dropdown-item>
+          <el-dropdown-item
+            v-for="command in commandList"
+            :key="command.key"
+            :command="command.key"
+          >
+            {{ command.label }}
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </header>
@@ -22,12 +27,32 @@
 
 <script>
 import { mapMutations } from "vuex";
+import { deletePage, updatePage } from "@/api/page";
 export default {
   name: "PageCard",
   props: {
     page: {
       type: Object,
       default: () => ({})
+    },
+    mode: {
+      type: String,
+      isrequired: true
+    }
+  },
+  computed: {
+    commandList() {
+      if (this.mode === "h5")
+        return [
+          { key: "modifyName", label: "改名" },
+          { key: "deletePage", label: "删除" }
+        ];
+      if (this.mode === "trash")
+        return [
+          { key: "recover", label: "还原" },
+          { key: "deletePage", label: "删除" }
+        ];
+      return [];
     }
   },
   methods: {
@@ -36,13 +61,27 @@ export default {
      * 处理下拉框触发事件
      * @param {string} command 指令
      */
-    handleDropdownCommand(command) {
+    async handleDropdownCommand(command) {
       switch (command) {
         case "modifyName":
-          // TODO
+          this.$prompt("", `为「 ${this.page.name} 」重命名`, {
+            showCancelButton: false,
+            confirmButtonText: "确定",
+            inputPattern: /^\S{2,8}$/,
+            inputErrorMessage: "页面名称长度为2-8"
+          }).then(async res => {
+            const name = res.value;
+            await updatePage(this.page.id, { name });
+            this.page.name = name;
+          });
+          break;
+        case "recover":
+          await updatePage(this.page.id, { is_delete: false });
+          this.$emit("deleteItem", this.page.id);
           break;
         case "deletePage":
-          // TODO
+          await deletePage(this.page.id);
+          this.$emit("deleteItem", this.page.id);
           break;
       }
     },

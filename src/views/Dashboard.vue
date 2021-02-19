@@ -11,79 +11,74 @@
     </div>
     <!-- 右侧内容区 -->
     <div class="right-content">
-      <div class="toolbar">
+      <!-- 顶部操作区 -->
+      <header class="header">
         <el-input
-          class="filter-search"
+          class="search-input"
           prefix-icon="el-icon-search"
           placeholder="请输入项目名称"
-          v-model="filterValue"
+          v-model="searchValue"
           clearable
-        >
-        </el-input>
-        <div>
-          <el-dropdown @command="handleDropdownCommand" placement="bottom">
-            <div class="user">Hong</div>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="center">个人中心</el-dropdown-item>
-              <el-dropdown-item command="exit" divided>退出</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </div>
-      </div>
-      <div class="my-page">
-        <p class="card-list__title">我的 H5 页面</p>
-        <div class="card-list">
+        />
+        <toolbar @showRecycleBin="showRecycleBin" />
+      </header>
+      <!-- 核心内容 -->
+      <div class="content">
+        <p class="page-list__title">我的 H5 页面</p>
+        <div class="page-list">
           <page-card
             v-for="page in filterPageList"
             :key="page.id"
             :page="page"
+            :mode="'h5'"
+            @deleteItem="deleteItem"
           />
         </div>
       </div>
     </div>
+    <recycle-bin ref="recycleBin" @fetchPageList="fetchPageList" />
   </div>
 </template>
 
 <script>
-import { getAllPages } from "@/api/page";
-import { createPage } from "@/api/page";
+import { createPage, getAllPages } from "@/api/page";
 import { mapMutations } from "vuex";
 import PageCard from "@/components/dashboard/page-card";
+import RecycleBin from "@/components/dashboard/recycle-bin";
+import Toolbar from "@/components/dashboard/toolbar";
+
 export default {
   name: "Dashboard",
   components: {
-    PageCard
+    PageCard,
+    Toolbar,
+    RecycleBin
   },
   data() {
     return {
       logoImg: require("../../public/img/Puzzle.png"),
-      filterValue: "",
+      searchValue: "",
       pageList: []
     };
   },
-  async created() {
-    this.pageList = await getAllPages().then(res => res.data);
+  created() {
+    this.fetchPageList();
   },
   computed: {
     filterPageList() {
       return this.pageList.filter(
-        item => item.name.indexOf(this.filterValue) > -1
+        item => item.name.indexOf(this.searchValue) > -1
       );
     }
   },
   methods: {
     ...mapMutations(["setPageId", "setPage"]),
-    handleDropdownCommand(command) {
-      switch (command) {
-        case "center":
-          // TODO
-          break;
-        case "exit":
-          this.$router.push({ name: "Login" });
-          sessionStorage.removeItem("isAuthenticated");
-          break;
-      }
+    async fetchPageList() {
+      this.pageList = await getAllPages().then(res => res.data);
     },
+    /**
+     * 创建新页面
+     */
     async createPage() {
       this.$prompt("", "给新页面取个名字吧", {
         showCancelButton: false,
@@ -97,6 +92,19 @@ export default {
         this.setPage(JSON.parse(page.page));
         this.$router.push({ name: "OperatingFloor" });
       });
+    },
+    /**
+     * 删除页面列表中的一项
+     * @param {number} id
+     */
+    deleteItem(id) {
+      this.pageList = this.pageList.filter(item => item.id !== id);
+    },
+    /**
+     * 展示回收站
+     */
+    showRecycleBin() {
+      this.$refs.recycleBin.showRecycleBin();
     }
   }
 };
@@ -150,29 +158,18 @@ $blue: #2f55eb;
     flex: 1;
     padding: 20px 40px;
     background-color: #f5f5f5;
-    .toolbar {
+    .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      .filter-search {
+      .search-input {
         width: 260px;
         .el-input__inner:focus {
           border-color: $blue;
         }
       }
-      .user {
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
-        border-radius: 50%;
-        background-color: $blue;
-        color: #ffffff;
-        font-size: 16px;
-        text-align: center;
-        cursor: pointer;
-      }
     }
-    .card-list {
+    .page-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
       grid-row-gap: 20px;
