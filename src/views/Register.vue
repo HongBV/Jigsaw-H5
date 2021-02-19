@@ -1,7 +1,10 @@
 <template>
   <div class="register">
     <header class="register__header">
-      <h1>🌌 Jigsaw H5</h1>
+      <div class="logo">
+        <img :src="logoImg" alt="logo" />
+        <h1>Jigsaw H5</h1>
+      </div>
       <div>
         <span @click="login">去登录</span>
         <span>去官网</span>
@@ -47,6 +50,7 @@ export default {
   name: "Register",
   data() {
     return {
+      logoImg: require("../../public/img/Puzzle.png"),
       userInfo: {
         account: "",
         password: ""
@@ -115,6 +119,9 @@ export default {
       password = CryptoJS.AES.encrypt(password, "jigsaw-h5").toString();
       return { account, password };
     },
+    /**
+     * 跳转至登录页
+     */
     login() {
       this.$router.push({ name: "Login" });
     }
@@ -131,10 +138,20 @@ export default {
     padding: 30px 40px 60px;
     display: flex;
     justify-content: space-between;
-    h1 {
-      margin: 0;
-      font-size: 26px;
-      color: #2f54eb;
+    .logo {
+      display: flex;
+      align-items: center;
+      img {
+        margin: 0 5px;
+        width: 32px;
+        height: 32px;
+        transform: translateY(-3px);
+      }
+      h1 {
+        margin: 0;
+        font-size: 26px;
+        color: #2f54eb;
+      }
     }
     span {
       margin: 0 10px;
