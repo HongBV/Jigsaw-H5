@@ -6,7 +6,15 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: "/operating-floor"
+    redirect: "/welcome",
+    component: () =>
+      import(/* webpackChunkName: "Welcome" */ "@/views/Welcome.vue")
+  },
+  {
+    path: "/welcome",
+    name: "Welcome",
+    component: () =>
+      import(/* webpackChunkName: "Welcome" */ "@/views/Welcome.vue")
   },
   {
     path: "/dashboard",
@@ -52,7 +60,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const isAuthenticated = sessionStorage.getItem("isAuthenticated");
-  const ignoreRoutes = ["Login", "Register", "Page"];
+  const ignoreRoutes = ["Welcome", "Login", "Register", "Page"];
   if (isAuthenticated || ignoreRoutes.includes(to.name)) next();
   else next({ name: "Login" });
 });

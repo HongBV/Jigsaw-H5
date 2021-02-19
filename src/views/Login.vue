@@ -6,8 +6,8 @@
         <h1>Jigsaw H5</h1>
       </div>
       <div>
-        <span @click="register">去注册</span>
-        <span>去官网</span>
+        <span @click="linkTo('Register')">去注册</span>
+        <span @click="linkTo('Welcome')">去官网</span>
       </div>
     </header>
     <main class="login__main">
@@ -106,10 +106,11 @@ export default {
       return { account, password };
     },
     /**
-     * 跳转至注册页
+     * 跳转
+     * @param {string} routerName
      */
-    register() {
-      this.$router.push({ name: "Register" });
+    linkTo(routerName) {
+      this.$router.push({ name: routerName });
     }
   }
 };
