@@ -4,25 +4,26 @@
       <nav class="navbar">
         <a class="navbar-brand" href="/"> Jigsaw-H5 </a>
         <ul class="navbar-nav">
-          <li class="nav-item">首页</li>
-          <li class="nav-item">特点</li>
+          <li class="nav-item" @click="scrollTo('home')">首页</li>
+          <li class="nav-item" @click="scrollTo('feature')">特点</li>
         </ul>
       </nav>
     </header>
-    <section class="section">
+    <section class="section" id="home">
       <div class="slogan">
         <h1>所见，即所得</h1>
         <p>
           Jigsaw-H5是一款功能强大，高可扩展的H5可视化页面配置解决方案。致力于提供一套简单方便、专业可靠、无限可能的H5落地页最佳实践
         </p>
         <button @click="linkTo('Dashboard')">立即体验</button>
+        <!-- TODO 待补充使用文档 -->
         <button @click="linkTo('Dashboard')">使用文档</button>
       </div>
       <div class="specimen">
         <img :src="phoneImg" alt="phone" draggable="false" />
       </div>
     </section>
-    <section class="section">
+    <section class="section" id="feature">
       <div class="feature-card-list">
         <div class="feature-card">
           <div class="feature-card__title">
@@ -81,6 +82,10 @@ export default {
      */
     linkTo(routerName) {
       this.$router.push({ name: routerName });
+    },
+    scrollTo(elId) {
+      const el = document.getElementById(elId);
+      el.scrollIntoView({ behavior: "smooth" });
     }
   }
 };
@@ -124,6 +129,7 @@ $white: #f5f5f5;
           font-size: 13px;
           text-transform: uppercase;
           letter-spacing: 0.6px;
+          cursor: pointer;
         }
       }
     }

@@ -27,7 +27,7 @@ export default {
     handleDropdownCommand(command) {
       switch (command) {
         case "center":
-          // TODO
+          // TODO 个人中心
           break;
         case "exit":
           this.$router.push({ name: "Login" });
