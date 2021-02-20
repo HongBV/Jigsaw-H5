@@ -74,6 +74,7 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
+import { throttle } from "lodash";
 import FormEdit from "@/components/operating-floor/form-edit";
 import IconSelect from "@/components/operating-floor/icon-select";
 export default {
@@ -91,6 +92,9 @@ export default {
       return this.currentMaterial.editData;
     }
   },
+  created() {
+    this.copyItem = throttle(this.copyItem, 500);
+  },
   methods: {
     ...mapMutations(["deleteMaterial", "addMaterial", "resetCurrentMaterial"]),
     deleteItem() {
@@ -100,7 +104,7 @@ export default {
     copyItem() {
       this.addMaterial({
         ...JSON.parse(JSON.stringify(this.currentMaterial)),
-        i: this.page.length
+        i: new Date().getTime()
       });
     },
     modifyProp(prop, value) {

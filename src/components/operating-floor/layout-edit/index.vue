@@ -77,7 +77,7 @@ export default {
     addComponent(material) {
       const { component, config, editData, layout, name } = material;
       this.addMaterial({
-        i: this.page.length,
+        i: new Date().getTime(),
         x: 0,
         y: this.maxHeight,
         w: layout.w || 24,
