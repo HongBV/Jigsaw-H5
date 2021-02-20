@@ -33,8 +33,8 @@ export default {
   transform: translate(-50%, -50%);
   .viewport {
     margin: 30px 15px 60px;
-    width: 325px;
-    height: 600px;
+    width: 375px;
+    height: 667px;
     border: solid 1px #dddddd;
     background-color: rgb(250, 250, 250);
     overflow: auto;

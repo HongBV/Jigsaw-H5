@@ -1,6 +1,7 @@
 <template>
   <grid-layout
     id="page"
+    class="page"
     :layout.sync="page"
     :col-num="24"
     :row-height="1"
@@ -45,8 +46,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.item {
-  position: relative;
-  overflow: hidden;
+.page {
+  min-height: 100%;
+  background-color: rgb(250, 250, 250);
+  .item {
+    position: relative;
+    overflow: hidden;
+  }
 }
 </style>
