@@ -1,6 +1,6 @@
 <template>
   <div class="toolbar">
-    <div class="toolbar__item" @click="showRecycleBin()">
+    <div class="toolbar__item" @click="linkTo('Welcome')">
       <i class="el-icon-house"></i>
     </div>
     <div class="toolbar__item" @click="showRecycleBin()">
@@ -40,6 +40,13 @@ export default {
      */
     showRecycleBin() {
       this.$emit("showRecycleBin");
+    },
+    /**
+     * 跳转
+     * @param {string} routerName
+     */
+    linkTo(routerName) {
+      this.$router.push({ name: routerName });
     }
   }
 };
