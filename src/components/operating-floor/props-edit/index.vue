@@ -12,7 +12,10 @@
         v-for="(editItem, idx) in currentMaterial.editData"
         :key="idx"
       >
-        <span class="label" v-if="!['Form', 'Icon'].includes(editItem.type)">
+        <span
+          class="label"
+          v-if="!['Form', 'Icon', 'ImageList'].includes(editItem.type)"
+        >
           {{ editItem.name }}
         </span>
         <el-input
@@ -60,6 +63,10 @@
           :icon="currentMaterial.config[editItem.key]"
           @modifyProp="val => modifyProp(editItem.key, val)"
         />
+        <list-edit
+          v-if="editItem.type === 'ImageList'"
+          :list="currentMaterial.config[editItem.key]"
+        />
       </div>
     </section>
     <section v-else>
@@ -76,11 +83,13 @@
 import { mapState, mapMutations } from "vuex";
 import { throttle } from "lodash";
 import FormEdit from "@/components/operating-floor/form-edit";
+import ListEdit from "@/components/operating-floor/list-edit";
 import IconSelect from "@/components/operating-floor/icon-select";
 export default {
   name: "PropsEdit",
   components: {
     FormEdit,
+    ListEdit,
     IconSelect
   },
   computed: {

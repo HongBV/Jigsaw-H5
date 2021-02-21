@@ -203,6 +203,11 @@ const materialsList = [
         step: 500,
         min: 500,
         max: 5000
+      },
+      {
+        key: "images",
+        name: "图片组控件",
+        type: "ImageList"
       }
     ],
     config: {
