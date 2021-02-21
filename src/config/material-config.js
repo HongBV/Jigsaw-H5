@@ -21,6 +21,14 @@ const materialsList = [
         max: 400
       },
       {
+        key: "height",
+        name: "按钮高度",
+        type: "Number",
+        step: 1,
+        min: 20,
+        max: 100
+      },
+      {
         key: "borderRadius",
         name: "按钮圆角",
         type: "Number",
@@ -70,6 +78,7 @@ const materialsList = [
     config: {
       text: "按钮",
       width: 100,
+      height: 36,
       borderRadius: 10,
       fontSize: 14,
       fontWeight: 400,

@@ -5,6 +5,7 @@
     :disabled="config.disabled"
     :plain="config.plain"
     :style="{
+      height: `${config.height}px`,
       width: `${config.width}px`,
       borderRadius: `${config.borderRadius}px`,
       fontSize: `${config.fontSize}px`,
@@ -24,6 +25,7 @@ export default {
       default: () => ({
         text: "按钮",
         width: 100,
+        height: 36,
         borderRadius: 10,
         fontSize: 14,
         fontWeight: 400,
@@ -40,7 +42,5 @@ export default {
 .bv-button {
   margin: 5px 0;
   padding: 0 10px;
-  height: calc(100% - 10px);
-  min-height: 20px;
 }
 </style>
