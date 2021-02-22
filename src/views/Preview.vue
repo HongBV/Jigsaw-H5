@@ -60,13 +60,13 @@ export default {
      */
     async generatePoster() {
       const node = document.getElementById("page");
-      domtoimage.toBlob(node).then(blob => saveAs(blob, "my-poster.png"));
+      domtoimage.toBlob(node).then(blob => saveAs(blob, "poster.png"));
     },
     /**
      * 生成二维码
      */
     async generateQR() {
-      const url = `http://192.168.31.68:8080/#/page?id=${this.pageId}`;
+      const url = `http://10.13.10.183:8080/#/page?id=${this.pageId}`;
       const options = { color: { dark: "#000000", light: "#f7f8fa" } };
       try {
         this.qrcode = await QRCode.toDataURL(url, options);
