@@ -68,7 +68,7 @@ export default {
             showCancelButton: false,
             confirmButtonText: "确定",
             inputPattern: /^\S{2,8}$/,
-            inputErrorMessage: "页面名称长度为2-8"
+            inputErrorMessage: "页面名称长度为2-8且不可含空格"
           }).then(async res => {
             const name = res.value;
             await updatePage(this.page.id, { name });
