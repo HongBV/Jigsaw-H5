@@ -1,6 +1,6 @@
 <template>
   <div class="materials-store">
-    <h2>素材仓库</h2>
+    <header class="header">素材仓库</header>
     <div class="materials-list">
       <div
         v-for="material in materialsList"
@@ -40,9 +40,10 @@ export default {
 <style scoped lang="scss">
 .materials-store {
   height: 100%;
-  padding: 20px;
-  h2 {
-    margin-bottom: 16px;
+  padding: 0 20px;
+  .header {
+    margin: 0;
+    padding: 16px 0;
     font-size: 18px;
     font-weight: 400;
     color: #000;

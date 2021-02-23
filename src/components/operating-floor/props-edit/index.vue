@@ -1,6 +1,6 @@
 <template>
   <div class="props-edit">
-    <header>
+    <header class="header">
       属性设置
       <span v-if="currentMaterial.name && currentMaterial.name">
         - {{ currentMaterial.name }}
@@ -125,12 +125,14 @@ export default {
 <style scoped lang="scss">
 .props-edit {
   position: relative;
-  padding: 20px;
+  padding: 0 20px;
   height: 100%;
   background: #fff;
   box-shadow: -2px 0 4px 0 rgba(0, 0, 0, 0.1);
-  header {
-    margin-bottom: 16px;
+  overflow: hidden;
+  .header {
+    margin: 0;
+    padding: 16px 0;
     font-size: 18px;
     font-weight: 400;
     color: #000;
@@ -169,7 +171,7 @@ export default {
   footer {
     position: absolute;
     left: 0;
-    bottom: 50px;
+    bottom: 10px;
     height: 50px;
     width: 100%;
     display: flex;

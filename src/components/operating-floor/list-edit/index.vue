@@ -37,7 +37,12 @@ export default {
      * 添加一项
      */
     addItem() {
-      this.list.push("");
+      this.list.push("https://img01.yzcdn.cn/vant/tree.jpg");
+      this.$nextTick(() => {
+        const elList = document.getElementsByClassName("list-edit-item");
+        const el = elList[elList.length - 1];
+        el.scrollIntoView({ behavior: "smooth" });
+      });
     }
   }
 };
