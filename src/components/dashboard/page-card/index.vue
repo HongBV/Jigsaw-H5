@@ -90,8 +90,10 @@ export default {
      */
     selectPage() {
       this.setPageId(this.page.id);
-      this.setPage(JSON.parse(this.page.page));
-      this.$router.push({ name: "OperatingFloor" });
+      this.$router.push({
+        name: "OperatingFloor",
+        query: { id: this.page.id }
+      });
     }
   }
 };

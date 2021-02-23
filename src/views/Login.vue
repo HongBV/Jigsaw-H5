@@ -39,6 +39,7 @@
 <script>
 import { login } from "@/api/user";
 import { debounce } from "lodash";
+import { mapMutations } from "vuex";
 
 const CryptoJS = require("crypto-js");
 
@@ -58,15 +59,19 @@ export default {
     this.handleSubmit = debounce(this.handleSubmit, 1000, { leading: true });
   },
   methods: {
+    ...mapMutations(["setUserId"]),
     /**
      * 用户登录
      */
     async handleSubmit() {
       if (!this.checkField()) return;
       const userInfo = this.encryptUserInfo(this.userInfo);
-      const { data } = await login(userInfo);
-      if (data.success) {
+      const { success, data, message } = await login(userInfo).then(
+        res => res.data
+      );
+      if (success) {
         sessionStorage.setItem("isAuthenticated", true);
+        this.setUserId(data.id);
         this.$message({
           message: "登录成功",
           type: "success",
@@ -74,7 +79,7 @@ export default {
         });
         this.$router.push({ name: "Dashboard" });
       } else {
-        this.$message.error(data.message);
+        this.$message.error(message);
       }
     },
     /**

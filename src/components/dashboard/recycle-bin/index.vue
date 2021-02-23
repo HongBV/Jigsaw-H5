@@ -20,6 +20,7 @@
 
 <script>
 import { getAllDeletedPages } from "@/api/page";
+import { mapState } from "vuex";
 import PageCard from "@/components/dashboard/page-card";
 export default {
   name: "RecycleBin",
@@ -32,12 +33,19 @@ export default {
       pageList: []
     };
   },
+  computed: {
+    ...mapState({
+      userId: state => state.user.id
+    })
+  },
   methods: {
     /**
      * 展示回收站
      */
     async showRecycleBin() {
-      this.pageList = await getAllDeletedPages().then(res => res.data);
+      this.pageList = await getAllDeletedPages(this.userId).then(
+        res => res.data
+      );
       this.visible = true;
     },
     /**

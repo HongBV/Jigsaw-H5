@@ -17,7 +17,7 @@
       </div>
     </section>
     <section class="section__right">
-      <simulation-phone></simulation-phone>
+      <simulation-phone />
     </section>
   </div>
 </template>
@@ -27,7 +27,8 @@ import SimulationPhone from "@/components/preview/simulation-phone";
 import domtoimage from "dom-to-image";
 import QRCode from "qrcode";
 import { saveAs } from "file-saver";
-import { mapState } from "vuex";
+import { getPageById } from "@/api/page";
+import { mapMutations } from "vuex";
 
 export default {
   name: "Preview",
@@ -36,24 +37,40 @@ export default {
   },
   data() {
     return {
+      pageId: null,
       qrcode: null
     };
   },
-  computed: {
-    ...mapState({
-      page: state => state.editor.page,
-      pageId: state => state.editor.pageId
-    })
-  },
   created() {
+    this.pageId = this.$route.query.id;
+    if (!this.pageId) {
+      this.$message({
+        message: "预览失败,2S后将自动跳转至首页",
+        type: "error",
+        duration: 2000,
+        onClose: () => {
+          this.$router.replace({ name: "Dashboard" });
+        }
+      });
+    }
+    this.fetchPage(this.pageId);
     this.generateQR();
   },
   methods: {
+    ...mapMutations(["setPage", "setPageId"]),
+    /**
+     * 获取页面数据
+     */
+    async fetchPage(id) {
+      const { data } = await getPageById(id);
+      this.setPage(JSON.parse(data.page));
+      this.setPageId(id);
+    },
     /**
      * 返回操作页
      */
     goback() {
-      this.$router.push({ name: "OperatingFloor" });
+      this.$router.push({ name: "OperatingFloor", query: { id: this.pageId } });
     },
     /**
      * 生成海报
@@ -66,7 +83,7 @@ export default {
      * 生成二维码
      */
     async generateQR() {
-      const url = `http://10.13.10.183:8080/#/page?id=${this.pageId}`;
+      const url = `http://192.168.1.101:8080/#/page?id=${this.pageId}`;
       const options = { color: { dark: "#000000", light: "#f7f8fa" } };
       try {
         this.qrcode = await QRCode.toDataURL(url, options);

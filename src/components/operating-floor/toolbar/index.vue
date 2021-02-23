@@ -81,8 +81,9 @@ export default {
       });
     },
     // 预览
-    preview() {
-      this.$router.push({ name: "Preview" });
+    async preview() {
+      await updatePage(this.pageId, { page: this.page });
+      this.$router.push({ name: "Preview", query: { id: this.pageId } });
     },
     // 新建页面
     addNewPage() {},

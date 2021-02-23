@@ -42,7 +42,7 @@
 
 <script>
 import { createPage, getAllPages } from "@/api/page";
-import { mapMutations } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import PageCard from "@/components/dashboard/page-card";
 import RecycleBin from "@/components/dashboard/recycle-bin";
 import Toolbar from "@/components/dashboard/toolbar";
@@ -65,6 +65,9 @@ export default {
     this.fetchPageList();
   },
   computed: {
+    ...mapState({
+      userId: state => state.user.id
+    }),
     filterPageList() {
       return this.pageList.filter(
         item => item.name.indexOf(this.searchValue) > -1
@@ -73,8 +76,11 @@ export default {
   },
   methods: {
     ...mapMutations(["setPageId", "setPage"]),
+    /**
+     * 获取页面列表
+     */
     async fetchPageList() {
-      this.pageList = await getAllPages().then(res => res.data);
+      this.pageList = await getAllPages(this.userId).then(res => res.data);
     },
     /**
      * 创建新页面
@@ -87,10 +93,16 @@ export default {
         inputErrorMessage: "页面名称长度为2-8"
       }).then(async res => {
         const name = res.value;
-        const page = await createPage({ page: [], name }).then(res => res.data);
+        const page = await createPage({
+          page: [],
+          name,
+          creatorId: this.userId
+        }).then(res => res.data);
         this.setPageId(page.id);
-        this.setPage(JSON.parse(page.page));
-        this.$router.push({ name: "OperatingFloor" });
+        this.$router.push({
+          name: "OperatingFloor",
+          query: { id: page.id }
+        });
       });
     },
     /**

@@ -42,6 +42,7 @@
 import { GridLayout, GridItem } from "vue-grid-layout";
 import LayoutItem from "@/components/operating-floor/layout-item";
 import Toolbar from "@/components/operating-floor/toolbar";
+import { getPageById } from "@/api/page";
 import { mapState, mapMutations } from "vuex";
 export default {
   name: "LayoutEdit",
@@ -60,8 +61,21 @@ export default {
       return Math.max(...this.page.map(item => item.y + item.h));
     }
   },
+  created() {
+    this.fetchPage();
+  },
   methods: {
-    ...mapMutations(["addMaterial"]),
+    ...mapMutations(["addMaterial", "setPage", "setPageId"]),
+    /**
+     * 获取页面数据
+     */
+    async fetchPage() {
+      const id = this.$route.query.id;
+      if (!id) return;
+      const { data } = await getPageById(id);
+      this.setPage(JSON.parse(data.page));
+      this.setPageId(id);
+    },
     goBack() {
       this.$router.push({ name: "Dashboard" });
     },
