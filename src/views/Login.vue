@@ -97,6 +97,16 @@ export default {
         this.$refs.password.focus();
         return false;
       }
+      if (!/^[a-zA-Z0-9]{6,10}$/.test(account)) {
+        this.$message.error("账号只能为6到10位到数字或字母组合");
+        this.$refs.account.focus();
+        return false;
+      }
+      if (!/^[a-zA-Z0-9]{6,10}$/.test(password)) {
+        this.$message.error("密码只能为6到10位到数字或字母组合");
+        this.$refs.password.focus();
+        return false;
+      }
       return true;
     },
     /**
