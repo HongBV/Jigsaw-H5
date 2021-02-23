@@ -7,6 +7,30 @@
       </span>
     </header>
     <section v-if="editable">
+      <div class="text-input">
+        <span class="label">宽度</span>
+        <el-input-number
+          v-model="currentMaterial.w"
+          size="small"
+          :step="1"
+          :max="24"
+          :min="1"
+          @change="updatePage"
+          step-strictly
+        ></el-input-number>
+      </div>
+      <div class="text-input">
+        <span class="label">高度</span>
+        <el-input-number
+          v-model="currentMaterial.h"
+          size="small"
+          :step="1"
+          :max="1000"
+          :min="1"
+          @change="updatePage"
+          step-strictly
+        ></el-input-number>
+      </div>
       <div
         class="text-input"
         v-for="(editItem, idx) in currentMaterial.editData"
@@ -81,7 +105,7 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
-import { throttle } from "lodash";
+import { throttle, debounce } from "lodash";
 import FormEdit from "@/components/operating-floor/form-edit";
 import ListEdit from "@/components/operating-floor/list-edit";
 import IconSelect from "@/components/operating-floor/icon-select";
@@ -102,22 +126,39 @@ export default {
     }
   },
   created() {
+    // 通过防抖与节流优化性能
     this.copyItem = throttle(this.copyItem, 500);
+    this.updatePage = debounce(this.updatePage, 500);
   },
   methods: {
     ...mapMutations(["deleteMaterial", "addMaterial", "resetCurrentMaterial"]),
+    /**
+     * 删除该组件
+     */
     deleteItem() {
       this.deleteMaterial(this.currentMaterial);
       this.resetCurrentMaterial();
     },
+    /**
+     * 复制该组件
+     */
     copyItem() {
       this.addMaterial({
         ...JSON.parse(JSON.stringify(this.currentMaterial)),
         i: new Date().getTime()
       });
     },
+    /**
+     * 修改属性
+     */
     modifyProp(prop, value) {
       this.currentMaterial.config[prop] = value;
+    },
+    /**
+     * 刷新页面
+     */
+    updatePage() {
+      this.page.splice(0, 0);
     }
   }
 };
