@@ -72,7 +72,8 @@ export default {
   background-color: #f5f5f5;
   .el-drawer {
     &__body {
-      padding: 0 20px;
+      padding: 0 20px 40px;
+      overflow: auto;
       .page-list {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));

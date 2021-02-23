@@ -12,7 +12,7 @@
     <!-- 右侧内容区 -->
     <div class="right-content">
       <!-- 顶部操作区 -->
-      <header class="header">
+      <header class="right-content__header">
         <el-input
           class="search-input"
           prefix-icon="el-icon-search"
@@ -170,7 +170,8 @@ $blue: #2f55eb;
     flex: 1;
     padding: 20px 40px;
     background-color: #f5f5f5;
-    .header {
+    &__header {
+      margin-bottom: 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -181,14 +182,22 @@ $blue: #2f55eb;
         }
       }
     }
-    .page-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      grid-row-gap: 20px;
-      grid-column-gap: 20px;
-      &__title {
-        font-size: 18px;
-        font-weight: 600;
+    .content {
+      height: calc(100vh - 130px);
+      overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      .page-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        grid-row-gap: 20px;
+        grid-column-gap: 20px;
+        &__title {
+          margin: 0 0 18px;
+          font-size: 18px;
+          font-weight: 600;
+        }
       }
     }
   }
