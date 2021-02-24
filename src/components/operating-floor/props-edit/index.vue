@@ -1,97 +1,100 @@
 <template>
   <div class="props-edit">
-    <header class="header">
-      属性设置
-      <span v-if="currentMaterial.name && currentMaterial.name">
-        - {{ currentMaterial.name }}
-      </span>
+    <header class="header" v-if="currentMaterial.name">
+      {{ currentMaterial.name }}
     </header>
-    <section v-if="editable">
-      <div class="text-input">
-        <span class="label">宽度</span>
-        <el-input-number
-          v-model="currentMaterial.w"
-          size="small"
-          :step="1"
-          :max="24"
-          :min="1"
-          @change="updatePage"
-          step-strictly
-        ></el-input-number>
-      </div>
-      <div class="text-input">
-        <span class="label">高度</span>
-        <el-input-number
-          v-model="currentMaterial.h"
-          size="small"
-          :step="1"
-          :max="1000"
-          :min="1"
-          @change="updatePage"
-          step-strictly
-        ></el-input-number>
-      </div>
-      <div
-        class="text-input"
-        v-for="(editItem, idx) in currentMaterial.editData"
-        :key="idx"
-      >
-        <span
-          class="label"
-          v-if="!['Form', 'Icon', 'ImageList'].includes(editItem.type)"
-        >
-          {{ editItem.name }}
-        </span>
-        <el-input
-          v-if="['Text', 'Color'].includes(editItem.type)"
-          class="input"
-          v-model="currentMaterial.config[editItem.key]"
-          :type="editItem.type"
-        ></el-input>
-        <el-input-number
-          v-if="editItem.type === 'Number'"
-          v-model="currentMaterial.config[editItem.key]"
-          size="small"
-          :step="editItem.step"
-          :max="editItem.max"
-          :min="editItem.min"
-          step-strictly
-        ></el-input-number>
-        <el-switch
-          v-if="editItem.type === 'Switch'"
-          v-model="currentMaterial.config[editItem.key]"
-          active-color="#13ce66"
-          inactive-color="#ff4949"
-        >
-        </el-switch>
-        <el-select
-          v-if="editItem.type === 'Select'"
-          class="select"
-          v-model="currentMaterial.config[editItem.key]"
-          size="small"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in editItem.options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-        <form-edit
-          v-if="editItem.type === 'Form'"
-          :form="currentMaterial.config[editItem.key]"
-        />
-        <icon-select
-          v-if="editItem.type === 'Icon'"
-          :icon="currentMaterial.config[editItem.key]"
-          @modifyProp="val => modifyProp(editItem.key, val)"
-        />
-        <list-edit
-          v-if="editItem.type === 'ImageList'"
-          :list="currentMaterial.config[editItem.key]"
-        />
-      </div>
+    <section v-if="editable" class="collapse-wrapper">
+      <el-collapse v-model="activeNames">
+        <el-collapse-item title="容器属性" name="container">
+          <div class="text-input">
+            <span class="label">宽度</span>
+            <el-input-number
+              v-model="currentMaterial.w"
+              size="small"
+              :step="1"
+              :max="24"
+              :min="1"
+              @change="updatePage"
+              step-strictly
+            ></el-input-number>
+          </div>
+          <div class="text-input">
+            <span class="label">高度</span>
+            <el-input-number
+              v-model="currentMaterial.h"
+              size="small"
+              :step="1"
+              :max="1000"
+              :min="1"
+              @change="updatePage"
+              step-strictly
+            ></el-input-number>
+          </div>
+        </el-collapse-item>
+        <el-collapse-item title="组件属性" name="component">
+          <div
+            class="text-input"
+            v-for="(editItem, idx) in currentMaterial.editData"
+            :key="idx"
+          >
+            <span
+              class="label"
+              v-if="!['Form', 'Icon', 'ImageList'].includes(editItem.type)"
+            >
+              {{ editItem.name }}
+            </span>
+            <el-input
+              v-if="['Text', 'Color'].includes(editItem.type)"
+              class="input"
+              v-model="currentMaterial.config[editItem.key]"
+              :type="editItem.type"
+            ></el-input>
+            <el-input-number
+              v-if="editItem.type === 'Number'"
+              v-model="currentMaterial.config[editItem.key]"
+              size="small"
+              :step="editItem.step"
+              :max="editItem.max"
+              :min="editItem.min"
+              step-strictly
+            ></el-input-number>
+            <el-switch
+              v-if="editItem.type === 'Switch'"
+              v-model="currentMaterial.config[editItem.key]"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
+            >
+            </el-switch>
+            <el-select
+              v-if="editItem.type === 'Select'"
+              class="select"
+              v-model="currentMaterial.config[editItem.key]"
+              size="small"
+              placeholder="请选择"
+            >
+              <el-option
+                v-for="item in editItem.options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              />
+            </el-select>
+            <form-edit
+              v-if="editItem.type === 'Form'"
+              :form="currentMaterial.config[editItem.key]"
+            />
+            <icon-select
+              v-if="editItem.type === 'Icon'"
+              :icon="currentMaterial.config[editItem.key]"
+              @modifyProp="val => modifyProp(editItem.key, val)"
+            />
+            <list-edit
+              v-if="editItem.type === 'ImageList'"
+              :list="currentMaterial.config[editItem.key]"
+            />
+          </div>
+        </el-collapse-item>
+      </el-collapse>
     </section>
     <section v-else>
       <p>选择组件后即可编辑</p>
@@ -115,6 +118,11 @@ export default {
     FormEdit,
     ListEdit,
     IconSelect
+  },
+  data() {
+    return {
+      activeNames: []
+    };
   },
   computed: {
     ...mapState({
@@ -178,35 +186,47 @@ export default {
     font-weight: 400;
     color: #000;
   }
-  .text-input {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    .label {
-      width: 60px;
-      height: 32px;
-      line-height: 32px;
-      font-size: 14px;
-      color: #4a4a4a;
+  .collapse-wrapper {
+    height: calc(100vh - 130px);
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none; /* Chrome Safari */
     }
-    .input {
-      width: auto;
-      ::v-deep.el-input__inner {
-        height: 30px;
-        line-height: 30px;
-        cursor: pointer;
-        &[type="Text"] {
-          width: 180px;
-        }
-        &[type="Color"] {
-          width: 70px;
-          padding: 0 3px;
-        }
+    ::v-deep.el-collapse-item {
+      &__content {
+        padding: 0;
       }
     }
-    .select {
-      width: 180px;
+    .text-input {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      .label {
+        width: 60px;
+        height: 32px;
+        line-height: 32px;
+        font-size: 14px;
+        color: #4a4a4a;
+      }
+      .input {
+        width: auto;
+        ::v-deep.el-input__inner {
+          height: 30px;
+          line-height: 30px;
+          cursor: pointer;
+          &[type="Text"] {
+            width: 180px;
+          }
+          &[type="Color"] {
+            width: 70px;
+            padding: 0 3px;
+          }
+        }
+      }
+      .select {
+        width: 180px;
+      }
     }
   }
   footer {
