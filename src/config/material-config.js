@@ -433,6 +433,72 @@ const materialsList = [
       text: "图标",
       textSize: 12
     }
+  },
+  // BvCountdown
+  {
+    component: "BvCountdown",
+    name: "倒计时",
+    layout: {
+      h: 60,
+      w: 24
+    },
+    editData: [
+      {
+        key: "endTime",
+        name: "截至时间",
+        type: "Datetime"
+      },
+      {
+        key: "fontSize",
+        name: "字体大小",
+        type: "Number",
+        min: 12,
+        max: 54
+      },
+      {
+        key: "fontWeight",
+        name: "文字粗细",
+        type: "Number",
+        step: 100,
+        min: 300,
+        max: 800
+      },
+      {
+        key: "color",
+        name: "字体颜色",
+        type: "Color"
+      },
+      {
+        key: "showDay",
+        name: "显示天数",
+        type: "Switch"
+      },
+      {
+        key: "showHour",
+        name: "显示小时",
+        type: "Switch"
+      },
+      {
+        key: "showMin",
+        name: "显示分钟",
+        type: "Switch"
+      },
+      {
+        key: "showSec",
+        name: "显示秒钟",
+        type: "Switch"
+      }
+    ],
+    config: {
+      endTime: new Date().getTime() + 3600 * 24 * 1000,
+      fontSize: 14,
+      fontWeight: 400,
+      color: "#000000",
+      showDay: false,
+      showHour: true,
+      showMin: true,
+      showSec: true
+    }
   }
 ];
 export default materialsList;

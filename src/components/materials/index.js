@@ -12,6 +12,7 @@ import BvNotoceBar from "./notice-bar";
 import BvForm from "./form";
 import BvQrcode from "./qrcode";
 import BvIcon from "./icon";
+import BvCountdown from "./countdown";
 
 // 所有组件列表
 const components = [
@@ -24,7 +25,8 @@ const components = [
   BvNotoceBar,
   BvForm,
   BvQrcode,
-  BvIcon
+  BvIcon,
+  BvCountdown
 ];
 // 定义 install 方法，接收 Vue 作为参数
 const install = function(Vue) {
@@ -56,6 +58,7 @@ export {
   BvForm,
   BvQrcode,
   BvIcon,
+  BvCountdown,
   _register_components_object
 };
 

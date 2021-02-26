@@ -92,6 +92,18 @@
               v-if="editItem.type === 'ImageList'"
               :list="currentMaterial.config[editItem.key]"
             />
+            <el-date-picker
+              v-if="editItem.type === 'Datetime'"
+              v-model="currentMaterial.config[editItem.key]"
+              type="datetime"
+              size="small"
+              placeholder="选择截止日期与时间"
+              popper-class="props-edit-date-picker"
+              :clearable="false"
+              :picker-options="pickerOptions"
+              :firstDayOfWeek="1"
+            >
+            </el-date-picker>
           </div>
         </el-collapse-item>
       </el-collapse>
@@ -121,7 +133,12 @@ export default {
   },
   data() {
     return {
-      activeNames: []
+      activeNames: [],
+      pickerOptions: {
+        disabledDate: time => {
+          return new Date(time) < new Date();
+        }
+      }
     };
   },
   computed: {
@@ -130,7 +147,7 @@ export default {
       currentMaterial: state => state.editor.currentMaterial
     }),
     editable() {
-      return this.currentMaterial.editData;
+      return !!this.currentMaterial.editData;
     }
   },
   created() {
@@ -224,8 +241,12 @@ export default {
           }
         }
       }
-      .select {
+      .select,
+      .el-date-editor.el-input {
         width: 180px;
+        ::v-deep.el-input__inner {
+          padding-right: 0;
+        }
       }
     }
   }
@@ -242,5 +263,11 @@ export default {
       width: 40%;
     }
   }
+}
+</style>
+
+<style lang="scss">
+.props-edit-date-picker {
+  transform: translateX(-20px);
 }
 </style>
