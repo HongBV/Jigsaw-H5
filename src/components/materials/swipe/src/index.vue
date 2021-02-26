@@ -1,5 +1,12 @@
 <template>
-  <van-swipe :autoplay="config.interval" ref="swipe" class="swipe">
+  <van-swipe
+    ref="swipe"
+    class="swipe"
+    :autoplay="config.interval"
+    :vertical="config.vertical"
+    :touchable="config.touchable"
+    :show-indicators="config.showIndicators"
+  >
     <van-swipe-item v-for="(image, index) in config.images" :key="index">
       <img :src="image" draggable="false" />
     </van-swipe-item>
@@ -13,6 +20,9 @@ export default {
     config: {
       type: Object,
       default: () => ({
+        vertical: false,
+        touchable: true,
+        showIndicators: true,
         interval: 3000,
         images: [
           "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",

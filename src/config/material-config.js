@@ -204,6 +204,21 @@ const materialsList = [
         max: 5000
       },
       {
+        key: "vertical",
+        name: "纵向滚动",
+        type: "Switch"
+      },
+      {
+        key: "touchable",
+        name: "手势滑动",
+        type: "Switch"
+      },
+      {
+        key: "showIndicators",
+        name: "指示器",
+        type: "Switch"
+      },
+      {
         key: "images",
         name: "图片组控件",
         type: "ImageList"
@@ -211,6 +226,9 @@ const materialsList = [
     ],
     config: {
       interval: 3000,
+      vertical: false,
+      touchable: true,
+      showIndicators: true,
       images: [
         "https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg",
         "https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg",
