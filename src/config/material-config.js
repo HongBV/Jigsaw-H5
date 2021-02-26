@@ -101,6 +101,26 @@ const materialsList = [
         type: "Text"
       },
       {
+        key: "justifyContent",
+        name: "水平布局",
+        type: "Select",
+        options: [
+          { label: "左对齐", value: "flex-start" },
+          { label: "居中对齐", value: "center" },
+          { label: "右对齐", value: "flex-end" }
+        ]
+      },
+      {
+        key: "alignItems",
+        name: "垂直布局",
+        type: "Select",
+        options: [
+          { label: "顶部对齐", value: "flex-start" },
+          { label: "居中对齐", value: "center" },
+          { label: "底部对齐", value: "flex-end" }
+        ]
+      },
+      {
         key: "fontSize",
         name: "文字大小",
         type: "Number",
@@ -126,7 +146,9 @@ const materialsList = [
       text: "这是一行文本",
       fontSize: 14,
       fontWeight: 400,
-      color: "#000000"
+      color: "#000000",
+      justifyContent: "center",
+      alignItems: "center"
     }
   },
   // BvImage
