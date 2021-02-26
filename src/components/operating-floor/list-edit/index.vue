@@ -12,8 +12,7 @@
         :key="item + idx"
         :list="list"
         :idx="idx"
-      >
-      </list-edit-item>
+      />
     </div>
   </div>
 </template>

@@ -83,7 +83,7 @@ export default {
      * 生成二维码
      */
     async generateQR() {
-      const url = `http://192.168.1.101:8080/#/page?id=${this.pageId}`;
+      const url = `http://192.168.1.100:8080/#/page?id=${this.pageId}`;
       const options = { color: { dark: "#000000", light: "#f7f8fa" } };
       try {
         this.qrcode = await QRCode.toDataURL(url, options);

@@ -4,13 +4,10 @@
       <i class="el-icon-full-screen"></i>
     </div>
     <div class="toolbar__item" @click="savePage">
-      <i class="el-icon-folder-checked"></i>
+      <i class="el-icon-upload2"></i>
     </div>
     <div class="toolbar__item" @click="preview">
       <i class="el-icon-mobile-phone"></i>
-    </div>
-    <div class="toolbar__item" @click="addNewPage">
-      <i class="el-icon-copy-document"></i>
     </div>
     <div class="toolbar__item" @click="clearPage">
       <i class="el-icon-delete"></i>
@@ -85,8 +82,6 @@ export default {
       await updatePage(this.pageId, { page: this.page });
       this.$router.push({ name: "Preview", query: { id: this.pageId } });
     },
-    // 新建页面
-    addNewPage() {},
     // 清空页面
     clearPage() {
       this.setPage([]);
