@@ -354,13 +354,25 @@ const materialsList = [
     },
     editData: [
       {
-        key: "url",
+        key: "text",
         name: "信息",
         type: "Text"
+      },
+      {
+        key: "dark",
+        name: "图案颜色",
+        type: "Color"
+      },
+      {
+        key: "light",
+        name: "背景色",
+        type: "Color"
       }
     ],
     config: {
-      url: "https://www.baidu.com"
+      text: "https://www.baidu.com",
+      dark: "#000000",
+      light: "#fafafa"
     }
   },
   // BvIcon

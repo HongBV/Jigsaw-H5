@@ -11,7 +11,9 @@ export default {
     config: {
       type: Object,
       default: () => ({
-        url: "https://www.baidu.com"
+        text: "https://www.baidu.com",
+        dark: "#000000",
+        light: "#ffffff"
       })
     }
   },
@@ -21,7 +23,8 @@ export default {
     };
   },
   watch: {
-    "config.url": {
+    config: {
+      deep: true,
       immediate: true,
       handler(val) {
         this.generateQR(val);
@@ -30,7 +33,6 @@ export default {
   },
   created() {
     this.generateQR = debounce(this.generateQR, 1000); // 防抖处理
-    this.generateQR(this.config.url);
   },
   methods: {
     /**
@@ -38,9 +40,14 @@ export default {
      * @param {string} data 需要转化为二维码的数据
      */
     async generateQR(data) {
-      if (!data) data = " ";
+      const { text = " ", dark, light } = data;
       try {
-        this.base64 = await QRCode.toDataURL(data);
+        this.base64 = await QRCode.toDataURL(text, {
+          color: {
+            dark,
+            light
+          }
+        });
       } catch (err) {
         this.$message.error("二维码生成失败");
       }
