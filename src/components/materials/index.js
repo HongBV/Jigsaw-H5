@@ -13,6 +13,7 @@ import BvForm from "./form";
 import BvQrcode from "./qrcode";
 import BvIcon from "./icon";
 import BvCountdown from "./countdown";
+import BvDivider from "./divider";
 
 // 所有组件列表
 const components = [
@@ -26,7 +27,8 @@ const components = [
   BvForm,
   BvQrcode,
   BvIcon,
-  BvCountdown
+  BvCountdown,
+  BvDivider
 ];
 // 定义 install 方法，接收 Vue 作为参数
 const install = function(Vue) {
@@ -59,6 +61,7 @@ export {
   BvQrcode,
   BvIcon,
   BvCountdown,
+  BvDivider,
   _register_components_object
 };
 

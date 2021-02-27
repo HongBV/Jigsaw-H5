@@ -521,6 +521,68 @@ const materialsList = [
       showMin: true,
       showSec: true
     }
+  },
+  // BvCountdown
+  {
+    component: "BvDivider",
+    name: "分割线",
+    layout: {
+      h: 50,
+      w: 24
+    },
+    editData: [
+      {
+        key: "showText",
+        name: "显示文本",
+        type: "Switch"
+      },
+      {
+        key: "dashed",
+        name: "虚线",
+        type: "Switch"
+      },
+      {
+        key: "text",
+        name: "文本",
+        type: "Text"
+      },
+      {
+        key: "contentPosition",
+        name: "内容位置",
+        type: "Select",
+        options: [
+          { label: "左侧", value: "left" },
+          { label: "居中", value: "center" },
+          { label: "右侧", value: "right" }
+        ]
+      },
+      {
+        key: "color",
+        name: "文字颜色",
+        type: "Color"
+      },
+      {
+        key: "borderColor",
+        name: "线条颜色",
+        type: "Color"
+      },
+      {
+        key: "padding",
+        name: "边距",
+        type: "Number",
+        min: 0,
+        max: 30
+      }
+    ],
+    config: {
+      showText: true,
+      dashed: false,
+      text: "文字",
+      contentPosition: "center",
+      color: "#CCCCCC",
+      borderColor: "#CCCCCC",
+      padding: 0
+    }
   }
 ];
 export default materialsList;
