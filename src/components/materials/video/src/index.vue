@@ -25,7 +25,12 @@ export default {
       default: () => ({
         url:
           "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm",
-        muted: true
+        muted: true,
+        autoplay: false,
+        loop: false,
+        fluid: false,
+        notSupportedMessage: "此视频暂无法播放，请稍后再试",
+        poster: "https://img01.yzcdn.cn/vant/apple-3.jpg"
       })
     }
   },
@@ -35,16 +40,19 @@ export default {
     },
     playerOptions() {
       return {
-        muted: this.config.muted,
-        language: "en",
-        playbackRates: [0.7, 1.0, 1.5, 2.0],
+        muted: this.config.muted, // 静音
+        autoplay: this.config.autoplay, // 自动播放
+        loop: this.config.loop, // 循环播放
+        fluid: this.config.fluid, // 窗口自适应
+        notSupportedMessage: this.config.notSupportedMessage, // Video.js无法播放媒体源时显示的默认信息。
+        playbackRates: [0.7, 1.0, 1.5, 2.0], // 可选的播放速度
+        poster: this.config.poster,
         sources: [
           {
             type: "video/mp4",
             src: this.config.url
           }
         ]
-        // poster: "/static/images/author.jpg"
       };
     }
   }
@@ -62,6 +70,9 @@ export default {
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
+    }
+    .vjs-poster {
+      background-size: cover;
     }
   }
 }

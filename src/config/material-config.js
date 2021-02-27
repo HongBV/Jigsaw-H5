@@ -277,12 +277,42 @@ const materialsList = [
         key: "muted",
         name: "静音播放",
         type: "Switch"
+      },
+      {
+        key: "autoplay",
+        name: "自动播放",
+        type: "Switch"
+      },
+      {
+        key: "loop",
+        name: "循环播放",
+        type: "Switch"
+      },
+      {
+        key: "fluid",
+        name: "平铺播放",
+        type: "Switch"
+      },
+      {
+        key: "notSupportedMessage",
+        name: "失败提示",
+        type: "Text"
+      },
+      {
+        key: "poster",
+        name: "封面链接",
+        type: "Text"
       }
     ],
     config: {
       url:
         "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm",
-      muted: true
+      muted: true,
+      autoplay: false,
+      loop: false,
+      fluid: false,
+      notSupportedMessage: "此视频暂无法播放，请稍后再试",
+      poster: "https://img01.yzcdn.cn/vant/apple-3.jpg"
     }
   },
   // BvNotoceBar
