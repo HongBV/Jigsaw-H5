@@ -1,7 +1,14 @@
 <template>
-  <div class="page" v-if="page">
-    <div v-if="isPC">仅支持移动端访问</div>
-    <renderer v-else :page="page"></renderer>
+  <div class="page">
+    <div v-if="isPC" class="empty">
+      <van-empty image="error" description="仅支持移动端访问" image-size="300">
+        <el-button round @click="linkTo('Welcome')">返回官网</el-button>
+      </van-empty>
+    </div>
+    <div v-else-if="!page" class="empty">
+      <van-empty description="页面已失效" />
+    </div>
+    <renderer v-else :page="page" />
   </div>
 </template>
 
@@ -38,17 +45,25 @@ export default {
     },
     /**
      * 获取页面数据
+     * @param {number} id
      */
-    async fetchPage() {
-      const id = this.$route.query.id;
-      if (!id) return;
+    async fetchPage(id) {
       const { data } = await getPageById(id);
+      if (!data) return;
       this.page = JSON.parse(data.page);
+    },
+    /**
+     * 跳转
+     * @param {string} routerName
+     */
+    linkTo(routerName) {
+      this.$router.push({ name: routerName });
     }
   },
   created() {
     this.ua = this.getUA();
-    this.fetchPage();
+    const id = this.$route.query.id;
+    id && this.fetchPage(id);
   }
 };
 </script>
@@ -56,5 +71,12 @@ export default {
 .page {
   width: 100%;
   height: 100%;
+  .empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 </style>
