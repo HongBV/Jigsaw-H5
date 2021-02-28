@@ -1,6 +1,13 @@
 <template>
   <div class="simulation-phone">
-    <div class="viewport" id="viewport">
+    <div
+      class="viewport"
+      id="viewport"
+      :style="{
+        width: viewportWidth + 'px',
+        height: viewportHeight + 'px'
+      }"
+    >
       <renderer :page="page"></renderer>
     </div>
   </div>
@@ -17,7 +24,9 @@ export default {
   },
   computed: {
     ...mapState({
-      page: state => state.editor.page
+      page: state => state.editor.page,
+      viewportWidth: state => state.editor.viewportWidth,
+      viewportHeight: state => state.editor.viewportHeight
     })
   }
 };
@@ -33,8 +42,6 @@ export default {
   transform: translate(-50%, -50%);
   .viewport {
     margin: 30px 15px 60px;
-    width: 375px;
-    height: 667px;
     border: solid 1px #dddddd;
     background-color: rgb(250, 250, 250);
     overflow: auto;

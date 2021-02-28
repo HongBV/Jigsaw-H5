@@ -1,9 +1,9 @@
 <template>
-  <div class="props-edit">
-    <header class="header" v-if="currentMaterial.name">
+  <div class="props-edit" v-if="editable">
+    <header class="header">
       {{ currentMaterial.name }}
     </header>
-    <section v-if="editable" class="collapse-wrapper">
+    <section class="collapse-wrapper">
       <el-collapse v-model="activeNames">
         <el-collapse-item title="容器属性" name="container">
           <div class="text-input">
@@ -108,17 +108,61 @@
         </el-collapse-item>
       </el-collapse>
     </section>
-    <section v-else>
-      <p>选择组件后即可编辑</p>
-    </section>
-    <footer v-if="editable">
+    <footer>
       <el-button @click="copyItem" type="primary" round plain>复 制</el-button>
       <el-button @click="deleteItem" type="danger" round plain>删 除</el-button>
     </footer>
   </div>
+  <div class="props-edit" v-else>
+    <header class="header">编辑器</header>
+    <section class="collapse-wrapper">
+      <div class="text-input">
+        <span class="label">预览机型</span>
+        <el-select
+          class="select"
+          v-model="machine"
+          size="small"
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="item in machineList"
+            :key="item"
+            :label="item"
+            :value="item"
+          />
+        </el-select>
+      </div>
+      <template v-if="machine == '自定义'">
+        <div class="text-input">
+          <span class="label">页面宽度</span>
+          <el-input-number
+            v-model="viewportWidth"
+            size="small"
+            :max="600"
+            :min="375"
+            step-strictly
+          ></el-input-number>
+        </div>
+        <div class="text-input">
+          <span class="label">页面高度</span>
+          <el-input-number
+            v-model="viewportHeight"
+            size="small"
+            :max="1000"
+            :min="667"
+            step-strictly
+          ></el-input-number></div
+      ></template>
+    </section>
+  </div>
 </template>
 
 <script>
+const machineSize = {
+  "iphone 5/SE": [320, 568],
+  "iphone 6/7/8": [375, 667],
+  "iphone 6/7/8 Plus": [414, 736]
+};
 import { mapState, mapMutations } from "vuex";
 import { throttle, debounce } from "lodash";
 import FormEdit from "@/components/operating-floor/form-edit";
@@ -133,6 +177,15 @@ export default {
   },
   data() {
     return {
+      machine: "自定义",
+      machineList: [
+        "自定义",
+        "iphone 5/SE",
+        "iphone 6/7/8",
+        "iphone 6/7/8 Plus"
+      ],
+      viewportWidth: 375,
+      viewportHeight: 667,
       activeNames: [],
       pickerOptions: {
         disabledDate: time => {
@@ -150,13 +203,33 @@ export default {
       return !!this.currentMaterial.editData;
     }
   },
+  watch: {
+    viewportWidth(val) {
+      this.setViewportWidth(val);
+    },
+    viewportHeight(val) {
+      this.setViewportHeight(val);
+    },
+    machine(val) {
+      if (!val || val === "自定义") return;
+      const [width, height] = machineSize[val];
+      this.viewportWidth = width;
+      this.viewportHeight = height;
+    }
+  },
   created() {
     // 通过防抖与节流优化性能
     this.copyItem = throttle(this.copyItem, 500);
     this.updatePage = debounce(this.updatePage, 500);
   },
   methods: {
-    ...mapMutations(["deleteMaterial", "addMaterial", "resetCurrentMaterial"]),
+    ...mapMutations([
+      "deleteMaterial",
+      "addMaterial",
+      "resetCurrentMaterial",
+      "setViewportWidth",
+      "setViewportHeight"
+    ]),
     /**
      * 删除该组件
      */
@@ -172,7 +245,8 @@ export default {
       this.addMaterial(currentMaterial);
     },
     /**
-     * 修改属性
+     * @param {string} prop
+     * @param {any} value
      */
     modifyProp(prop, value) {
       this.currentMaterial.config[prop] = value;

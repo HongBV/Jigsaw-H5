@@ -1,10 +1,13 @@
 const state = {
   pageId: null,
   page: [],
-  currentMaterial: {}
+  currentMaterial: {},
+  viewportWidth: 375,
+  viewportHeight: 667
 };
 const actions = {};
 const mutations = {
+  // page
   setPage(state, page) {
     state.page = page;
   },
@@ -39,6 +42,13 @@ const mutations = {
   },
   setPageId(state, pageId) {
     state.pageId = pageId;
+  },
+  // viewport
+  setViewportWidth(state, width) {
+    state.viewportWidth = width;
+  },
+  setViewportHeight(state, height) {
+    state.viewportHeight = height;
   }
 };
 

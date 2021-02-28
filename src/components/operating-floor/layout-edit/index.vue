@@ -11,6 +11,10 @@
       <div
         id="viewport"
         class="viewport"
+        :style="{
+          width: viewportWidth + 'px',
+          minHeight: viewportHeight + 'px'
+        }"
         @click.stop
         @drop="onDrop($event)"
         @dragover="onDragover($event)"
@@ -60,7 +64,9 @@ export default {
   },
   computed: {
     ...mapState({
-      page: state => state.editor.page
+      page: state => state.editor.page,
+      viewportWidth: state => state.editor.viewportWidth,
+      viewportHeight: state => state.editor.viewportHeight
     })
   },
   created() {
@@ -142,8 +148,6 @@ export default {
     overflow: auto;
     .viewport {
       margin: 70px auto;
-      width: 375px;
-      min-height: 667px;
       box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
       .item {
         position: relative;
