@@ -92,12 +92,6 @@ export default {
     onDrop(e) {
       e.preventDefault();
       const material = JSON.parse(e.dataTransfer.getData("material"));
-      this.addComponent(material);
-    },
-    /**
-     * 添加组件
-     */
-    addComponent(material) {
       this.addMaterial(material);
     },
     /**
