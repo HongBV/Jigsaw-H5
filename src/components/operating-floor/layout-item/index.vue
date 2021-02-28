@@ -1,5 +1,5 @@
 <template>
-  <div class="layout-item" @click="editMaterial">
+  <div class="layout-item" @click.stop="editMaterial">
     <component :is="material.component" :config="material.config"></component>
   </div>
 </template>

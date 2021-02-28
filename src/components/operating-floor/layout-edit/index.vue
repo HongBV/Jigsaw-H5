@@ -1,11 +1,17 @@
 <template>
   <div class="layout-edit">
     <i class="el-icon-back go-back" @click="goBack"></i>
+    <el-backtop target=".viewport-wrapper" :right="320"></el-backtop>
     <toolbar />
-    <div class="viewport-wrapper">
+    <div
+      class="viewport-wrapper no-scrollbar"
+      id="viewport-wrapper"
+      @click="clearCurrentMaterial"
+    >
       <div
         id="viewport"
         class="viewport"
+        @click.stop
         @drop="onDrop($event)"
         @dragover="onDragover($event)"
       >
@@ -65,7 +71,12 @@ export default {
     this.fetchPage();
   },
   methods: {
-    ...mapMutations(["addMaterial", "setPage", "setPageId"]),
+    ...mapMutations([
+      "addMaterial",
+      "setPage",
+      "setPageId",
+      "setCurrentMaterial"
+    ]),
     /**
      * 获取页面数据
      */
@@ -87,7 +98,9 @@ export default {
       const material = JSON.parse(e.dataTransfer.getData("material"));
       this.addComponent(material);
     },
-    // 添加组件
+    /**
+     * 添加组件
+     */
     addComponent(material) {
       const { component, config, editData, layout, name } = material;
       this.addMaterial({
@@ -101,6 +114,25 @@ export default {
         config,
         editData
       });
+      setTimeout(() => {
+        this.scrollToBottom();
+      }, 150);
+    },
+    /**
+     * 滚动至底部
+     */
+    scrollToBottom() {
+      const scrollTarget = document.getElementById("viewport-wrapper");
+      const pre = scrollTarget.scrollTop;
+      scrollTarget.scrollTop += (scrollTarget.scrollHeight / 30) >>> 0;
+      if (scrollTarget.scrollTop === pre) return;
+      window.requestAnimationFrame(this.scrollToBottom);
+    },
+    /**
+     * 清空当前选中素材
+     */
+    clearCurrentMaterial() {
+      this.setCurrentMaterial({});
     }
   }
 };
@@ -110,6 +142,7 @@ export default {
 .layout-edit {
   position: relative;
   height: 100%;
+  background-color: #fafafa;
   .go-back {
     position: absolute;
     left: 20px;
@@ -128,17 +161,17 @@ export default {
       color: rgb(47, 84, 235);
     }
   }
+  .el-backtop {
+    color: #000000;
+  }
   .viewport-wrapper {
-    position: relative;
+    width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f5f5f5;
+    overflow: auto;
     .viewport {
+      margin: 70px auto;
       width: 375px;
       min-height: 667px;
-      background-color: #fafafa;
       box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
       .item {
         position: relative;
@@ -160,6 +193,11 @@ export default {
           opacity: 1;
         }
       }
+    }
+  }
+  .no-scrollbar {
+    &::-webkit-scrollbar {
+      display: none; /* Chrome Safari */
     }
   }
 }
