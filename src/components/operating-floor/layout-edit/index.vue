@@ -61,11 +61,7 @@ export default {
   computed: {
     ...mapState({
       page: state => state.editor.page
-    }),
-    maxHeight() {
-      if (!this.page.length) return 0;
-      return Math.max(...this.page.map(item => item.y + item.h));
-    }
+    })
   },
   created() {
     this.fetchPage();
@@ -102,31 +98,7 @@ export default {
      * 添加组件
      */
     addComponent(material) {
-      const { component, config, editData, layout, name } = material;
-      this.addMaterial({
-        i: new Date().getTime(),
-        x: 0,
-        y: this.maxHeight,
-        w: layout.w || 24,
-        h: layout.h || 20,
-        component,
-        name,
-        config,
-        editData
-      });
-      setTimeout(() => {
-        this.scrollToBottom();
-      }, 150);
-    },
-    /**
-     * 滚动至底部
-     */
-    scrollToBottom() {
-      const scrollTarget = document.getElementById("viewport-wrapper");
-      const pre = scrollTarget.scrollTop;
-      scrollTarget.scrollTop += (scrollTarget.scrollHeight / 30) >>> 0;
-      if (scrollTarget.scrollTop === pre) return;
-      window.requestAnimationFrame(this.scrollToBottom);
+      this.addMaterial(material);
     },
     /**
      * 清空当前选中素材

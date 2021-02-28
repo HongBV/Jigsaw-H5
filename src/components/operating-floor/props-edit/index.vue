@@ -168,10 +168,8 @@ export default {
      * 复制该组件
      */
     copyItem() {
-      this.addMaterial({
-        ...JSON.parse(JSON.stringify(this.currentMaterial)),
-        i: new Date().getTime()
-      });
+      const currentMaterial = JSON.parse(JSON.stringify(this.currentMaterial));
+      this.addMaterial(currentMaterial);
     },
     /**
      * 修改属性
