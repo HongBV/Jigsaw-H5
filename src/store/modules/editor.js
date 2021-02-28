@@ -13,7 +13,7 @@ const mutations = {
   },
   addMaterial(state, material, scroll = true) {
     const { component, config, editData, layout, w, h, name } = material;
-    const maxHeight = Math.max(...state.page.map(item => item.y + item.h));
+    const maxHeight = Math.max(0, ...state.page.map(item => item.y + item.h));
     const newMaterial = {
       i: new Date().getTime(),
       x: 0,
@@ -26,7 +26,7 @@ const mutations = {
       editData
     };
     state.page.push(newMaterial);
-    if (!scroll) return;
+    if (!scroll || state.viewportHeight > maxHeight) return;
     setTimeout(() => {
       scrollToBottom();
     }, 150);
