@@ -1,12 +1,12 @@
 <template>
   <div class="layout-edit">
-    <i class="el-icon-back go-back" @click="goBack"></i>
+    <i class="el-icon-back go-back" @click="linkTo('Dashboard')"></i>
     <el-backtop target=".viewport-wrapper" :right="320"></el-backtop>
     <toolbar />
     <div
       class="viewport-wrapper no-scrollbar"
       id="viewport-wrapper"
-      @click="clearCurrentMaterial"
+      @click="resetCurrentMaterial"
     >
       <div
         id="viewport"
@@ -71,7 +71,7 @@ export default {
       "addMaterial",
       "setPage",
       "setPageId",
-      "setCurrentMaterial"
+      "resetCurrentMaterial"
     ]),
     /**
      * 获取页面数据
@@ -83,22 +83,28 @@ export default {
       this.setPage(JSON.parse(data.page));
       this.setPageId(id);
     },
-    goBack() {
-      this.$router.push({ name: "Dashboard" });
+    /**
+     * 路由跳转
+     * @param {string} routerName
+     */
+    linkTo(routerName) {
+      this.$router.push(routerName);
     },
+    /**
+     * 拖拽进入viewport的钩子函数
+     * @param {object} e
+     */
     onDragover(e) {
       e.preventDefault();
     },
+    /**
+     * 放置在viewport的钩子函数
+     * @param {object} e
+     */
     onDrop(e) {
       e.preventDefault();
       const material = JSON.parse(e.dataTransfer.getData("material"));
       this.addMaterial(material);
-    },
-    /**
-     * 清空当前选中素材
-     */
-    clearCurrentMaterial() {
-      this.setCurrentMaterial({});
     }
   }
 };
