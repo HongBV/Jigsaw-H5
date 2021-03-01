@@ -89,6 +89,7 @@ export default {
      * 选中该页面
      */
     selectPage() {
+      if (this.mode === "trash") return;
       this.setPageId(this.page.id);
       this.$router.push({
         name: "OperatingFloor",
