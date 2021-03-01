@@ -1,19 +1,21 @@
 <template>
   <div class="materials-store">
     <header class="header">素材仓库</header>
-    <div class="materials-list">
-      <div
-        v-for="material in materialsList"
-        :key="material.name"
-        class="material-card"
-        draggable="true"
-        @dragstart="onDragstart($event, material)"
-      >
-        <div class="material-card__preview" draggable="false">
-          <div class="material-card__mask"></div>
-          <component :is="material.component"></component>
+    <div class="materials-list__wrapper">
+      <div class="materials-list">
+        <div
+          v-for="material in materialsList"
+          :key="material.name"
+          class="material-card"
+          draggable="true"
+          @dragstart="onDragstart($event, material)"
+        >
+          <div class="material-card__preview" draggable="false">
+            <div class="material-card__mask"></div>
+            <component :is="material.component"></component>
+          </div>
+          <p class="material-card__name">{{ material.name }}</p>
         </div>
-        <p class="material-card__name">{{ material.name }}</p>
       </div>
     </div>
   </div>
@@ -49,10 +51,18 @@ export default {
     color: #000;
   }
   .materials-list {
+    margin-bottom: 10px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-row-gap: 10px;
     grid-column-gap: 10px;
+    &__wrapper {
+      height: calc(100vh - 57px);
+      overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
     .material-card {
       border: 2px solid #f0f0f0;
       border-radius: 5px;
