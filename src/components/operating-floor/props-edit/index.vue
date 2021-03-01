@@ -39,7 +39,9 @@
           >
             <span
               class="label"
-              v-if="!['Form', 'Icon', 'ImageList'].includes(editItem.type)"
+              v-if="
+                !['Form', 'Icon', 'ImageList', 'Tab'].includes(editItem.type)
+              "
             >
               {{ editItem.name }}
             </span>
@@ -104,6 +106,10 @@
               :firstDayOfWeek="1"
             >
             </el-date-picker>
+            <tab-edit
+              v-if="editItem.type === 'Tab'"
+              :tabs="currentMaterial.config[editItem.key]"
+            />
           </div>
         </el-collapse-item>
       </el-collapse>
@@ -168,12 +174,14 @@ import { throttle, debounce } from "lodash";
 import FormEdit from "@/components/operating-floor/form-edit";
 import ListEdit from "@/components/operating-floor/list-edit";
 import IconSelect from "@/components/operating-floor/icon-select";
+import TabEdit from "@/components/operating-floor/tab-edit";
 export default {
   name: "PropsEdit",
   components: {
     FormEdit,
     ListEdit,
-    IconSelect
+    IconSelect,
+    TabEdit
   },
   data() {
     return {

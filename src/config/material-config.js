@@ -649,6 +649,95 @@ const materialsList = [
       borderColor: "#CCCCCC",
       padding: 0
     }
+  },
+  // BvTab
+  {
+    component: "BvTab",
+    name: "标签页",
+    layout: {
+      h: 118,
+      w: 24
+    },
+    editData: [
+      {
+        key: "topBorderRadius",
+        name: "顶部圆角",
+        type: "Number",
+        step: 1,
+        min: 0,
+        max: 20
+      },
+      {
+        key: "bottomBorderRadius",
+        name: "底部圆角",
+        type: "Number",
+        step: 1,
+        min: 0,
+        max: 20
+      },
+      {
+        key: "color",
+        name: "标签颜色",
+        type: "Color"
+      },
+      {
+        key: "navBgColor",
+        name: "导航背景",
+        type: "Color"
+      },
+      {
+        key: "contentBgColor",
+        name: "内容背景",
+        type: "Color"
+      },
+      {
+        key: "border",
+        name: "导航边框",
+        type: "Switch"
+      },
+      {
+        key: "animated",
+        name: "转场动画",
+        type: "Switch"
+      },
+      {
+        key: "tabs",
+        name: "标签控件",
+        type: "Tab"
+      }
+    ],
+    config: {
+      topBorderRadius: 0,
+      bottomBorderRadius: 0,
+      color: "#ee0a24",
+      navBgColor: "#ffffff",
+      contentBgColor: "#ffffff",
+      border: true,
+      animated: true,
+      tabs: [
+        {
+          title: "标签1",
+          content: "内容1",
+          badge: "",
+          dot: false,
+          disabled: false
+        },
+        {
+          title: "标签2",
+          content: "内容2",
+          badge: "",
+          dot: false,
+          disabled: false
+        },
+        {
+          title: "标签3",
+          content: "内容3",
+          badge: "",
+          dot: false,
+          disabled: false
+        }
+      ]
+    }
   }
 ];
 export default materialsList;

@@ -14,6 +14,7 @@ import BvQrcode from "./qrcode";
 import BvIcon from "./icon";
 import BvCountdown from "./countdown";
 import BvDivider from "./divider";
+import BvTab from "./tab";
 
 // 所有组件列表
 const components = [
@@ -28,7 +29,8 @@ const components = [
   BvQrcode,
   BvIcon,
   BvCountdown,
-  BvDivider
+  BvDivider,
+  BvTab
 ];
 // 定义 install 方法，接收 Vue 作为参数
 const install = function(Vue) {
