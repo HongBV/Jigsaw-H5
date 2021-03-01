@@ -49,21 +49,7 @@ components.forEach(item => {
   _register_components_object[item.name] = item;
 });
 
-export {
-  BvButton,
-  BvText,
-  BvPlaceholder,
-  BvImage,
-  BvSwipe,
-  BvVideo,
-  BvNotoceBar,
-  BvForm,
-  BvQrcode,
-  BvIcon,
-  BvCountdown,
-  BvDivider,
-  _register_components_object
-};
+export { _register_components_object };
 
 export default {
   install
