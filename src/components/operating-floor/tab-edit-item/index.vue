@@ -11,19 +11,29 @@
     </template>
     <!-- 编辑 -->
     <template v-else>
-      <div v-show="editable" class="editor">
+      <div class="editor">
         <div class="editor__item">
           <el-tag size="medium">标签</el-tag>
-          <el-input v-model="title" size="mini" maxlength="5" show-word-limit />
+          <el-input
+            v-model="newTab.title"
+            size="mini"
+            maxlength="5"
+            show-word-limit
+          />
         </div>
         <div class="editor__item">
           <el-tag size="medium">内容</el-tag>
-          <el-input v-model="content" resize="none" type="textarea" :rows="3" />
+          <el-input
+            v-model="newTab.content"
+            resize="none"
+            type="textarea"
+            :rows="3"
+          />
         </div>
         <div class="editor__item">
           <el-tag size="medium">徽标</el-tag>
           <el-input
-            v-model="tab.badge"
+            v-model="newTab.badge"
             size="mini"
             maxlength="5"
             show-word-limit
@@ -32,7 +42,7 @@
         <div class="editor__item">
           <el-tag size="medium">红点</el-tag>
           <el-switch
-            v-model="tab.dot"
+            v-model="newTab.dot"
             active-color="#13ce66"
             inactive-color="#ff4949"
           >
@@ -41,7 +51,7 @@
         <div class="editor__item">
           <el-tag size="medium">禁用</el-tag>
           <el-switch
-            v-model="tab.disabled"
+            v-model="newTab.disabled"
             active-color="#13ce66"
             inactive-color="#ff4949"
           >
@@ -73,8 +83,7 @@ export default {
   data() {
     return {
       editable: false,
-      title: null,
-      content: null
+      newTab: {}
     };
   },
   methods: {
@@ -91,16 +100,19 @@ export default {
      */
     edit() {
       this.editable = true;
-      this.title = this.tab.title;
-      this.content = this.tab.content;
+      this.newTab = { ...this.tab };
     },
     /**
      * 保存编辑
      */
     saveEdit() {
       this.editable = false;
-      this.tab.title = this.title;
-      this.tab.content = this.content;
+      const { title, content, badge, dot, disabled } = this.newTab;
+      this.tab.title = title;
+      this.tab.content = content;
+      this.tab.badge = badge;
+      this.tab.dot = dot;
+      this.tab.disabled = disabled;
     },
     /**
      * 取消编辑
