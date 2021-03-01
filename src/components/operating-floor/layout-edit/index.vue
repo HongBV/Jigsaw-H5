@@ -40,7 +40,7 @@
             :i="item.i"
             :key="item.i"
           >
-            <layout-item :material="item" />
+            <layout-item :material="item" :preview="false" />
           </grid-item>
         </grid-layout>
       </div>
@@ -159,14 +159,6 @@ export default {
           padding: 0;
           border: 2px solid #006aff;
           z-index: 1;
-        }
-        .mask {
-          position: absolute;
-          left: 0;
-          top: 0;
-          height: 100%;
-          width: 100%;
-          opacity: 1;
         }
       }
     }

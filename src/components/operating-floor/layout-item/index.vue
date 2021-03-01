@@ -1,6 +1,7 @@
 <template>
   <div class="layout-item" @click.stop="editMaterial">
     <component :is="material.component" :config="material.config"></component>
+    <div class="mask" v-if="!preview"></div>
   </div>
 </template>
 
@@ -16,6 +17,10 @@ export default {
     material: {
       type: Object,
       default: () => ({})
+    },
+    preview: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -34,5 +39,13 @@ export default {
 .layout-item {
   height: 100%;
   text-align: center;
+  .mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+  }
 }
 </style>
