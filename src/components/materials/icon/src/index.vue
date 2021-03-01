@@ -1,5 +1,5 @@
 <template>
-  <div class="bv-icon">
+  <div class="bv-icon" @click="handleClick">
     <i :class="config.type" :style="{ 'font-size': config.size + 'px' }"></i>
     <span :style="{ 'font-size': config.textSize + 'px' }">
       {{ config.text }}
@@ -17,8 +17,17 @@ export default {
         type: "el-icon-edit",
         size: 24,
         text: "",
-        textSize: 12
+        textSize: 12,
+        hyperlink: false,
+        targetUrl: ""
       })
+    }
+  },
+  methods: {
+    handleClick() {
+      if (this.config.hyperlink) {
+        window.open(this.config.targetUrl);
+      }
     }
   }
 };

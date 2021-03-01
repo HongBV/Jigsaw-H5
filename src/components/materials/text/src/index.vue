@@ -1,5 +1,5 @@
 <template>
-  <p
+  <div
     class="bv-text"
     :style="{
       fontSize: `${config.fontSize}px`,
@@ -9,8 +9,8 @@
       alignItems: config.alignItems
     }"
   >
-    {{ config.text }}
-  </p>
+    <span @click="handleClick">{{ config.text }}</span>
+  </div>
 </template>
 
 <script>
@@ -25,8 +25,17 @@ export default {
         fontWeight: 400,
         color: "#000000",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        hyperlink: false,
+        targetUrl: ""
       })
+    }
+  },
+  methods: {
+    handleClick() {
+      if (this.config.hyperlink) {
+        window.open(this.config.targetUrl);
+      }
     }
   }
 };

@@ -4,6 +4,7 @@
     :src="config.url"
     :fit="config.fit"
     :radius="config.borderRadius"
+    @click="handleClick"
   >
   </van-image>
 </template>
@@ -17,8 +18,17 @@ export default {
       default: () => ({
         url: "https://img01.yzcdn.cn/vant/tree.jpg",
         fit: "cover",
-        borderRadius: 0
+        borderRadius: 0,
+        hyperlink: false,
+        targetUrl: ""
       })
+    }
+  },
+  methods: {
+    handleClick() {
+      if (this.config.hyperlink) {
+        window.open(this.config.targetUrl);
+      }
     }
   }
 };

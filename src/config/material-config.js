@@ -140,6 +140,16 @@ const materialsList = [
         key: "color",
         name: "文字颜色",
         type: "Color"
+      },
+      {
+        key: "hyperlink",
+        name: "超链接",
+        type: "Switch"
+      },
+      {
+        key: "targetUrl",
+        name: "链接地址",
+        type: "Text"
       }
     ],
     config: {
@@ -148,7 +158,9 @@ const materialsList = [
       fontWeight: 400,
       color: "#000000",
       justifyContent: "center",
-      alignItems: "center"
+      alignItems: "center",
+      hyperlink: false,
+      targetUrl: ""
     }
   },
   // BvImage
@@ -183,12 +195,24 @@ const materialsList = [
           { label: "原图", value: "none" },
           { label: "自适应", value: "scale-down" }
         ]
+      },
+      {
+        key: "hyperlink",
+        name: "超链接",
+        type: "Switch"
+      },
+      {
+        key: "targetUrl",
+        name: "链接地址",
+        type: "Text"
       }
     ],
     config: {
       url: "https://img01.yzcdn.cn/vant/tree.jpg",
       fit: "cover",
-      borderRadius: 0
+      borderRadius: 0,
+      hyperlink: false,
+      targetUrl: ""
     }
   },
   // BvPlaceholder
@@ -474,6 +498,16 @@ const materialsList = [
         max: 24
       },
       {
+        key: "hyperlink",
+        name: "超链接",
+        type: "Switch"
+      },
+      {
+        key: "targetUrl",
+        name: "链接地址",
+        type: "Text"
+      },
+      {
         key: "type",
         name: "图标",
         type: "Icon"
@@ -483,7 +517,9 @@ const materialsList = [
       type: "el-icon-edit",
       size: 24,
       text: "图标",
-      textSize: 12
+      textSize: 12,
+      hyperlink: false,
+      targetUrl: ""
     }
   },
   // BvCountdown
@@ -552,7 +588,7 @@ const materialsList = [
       showSec: true
     }
   },
-  // BvCountdown
+  // BvDivider
   {
     component: "BvDivider",
     name: "分割线",
