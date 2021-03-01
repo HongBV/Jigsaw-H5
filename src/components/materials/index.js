@@ -15,6 +15,7 @@ import BvIcon from "./icon";
 import BvCountdown from "./countdown";
 import BvDivider from "./divider";
 import BvTab from "./tab";
+import BvAudio from "./audio";
 
 // 所有组件列表
 const components = [
@@ -30,7 +31,8 @@ const components = [
   BvIcon,
   BvCountdown,
   BvDivider,
-  BvTab
+  BvTab,
+  BvAudio
 ];
 // 定义 install 方法，接收 Vue 作为参数
 const install = function(Vue) {

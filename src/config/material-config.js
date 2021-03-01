@@ -738,6 +738,66 @@ const materialsList = [
         }
       ]
     }
+  },
+  // BvAudio
+  {
+    component: "BvAudio",
+    name: "音频",
+    layout: {
+      h: 36,
+      w: 24
+    },
+    editData: [
+      {
+        key: "audio",
+        name: "音频",
+        type: "Text"
+      },
+      {
+        key: "unsupported",
+        name: "异常提示",
+        type: "Text"
+      },
+      {
+        key: "preload",
+        name: "加载策略",
+        type: "Select",
+        options: [
+          { label: "预加载", value: "auto" },
+          { label: "仅预加载元信息", value: "metadata" },
+          { label: "不预加载", value: "none" }
+        ]
+      },
+      {
+        key: "controls",
+        name: "控制面板",
+        type: "Switch"
+      },
+      {
+        key: "autoplay",
+        name: "自动播放",
+        type: "Switch"
+      },
+      {
+        key: "loop",
+        name: "循环播放",
+        type: "Switch"
+      },
+      {
+        key: "muted",
+        name: "默认静音",
+        type: "Switch"
+      }
+    ],
+    config: {
+      audio: "http://h5.dooring.cn/audio.mp3",
+      unsupported: "您的浏览器不支持audio标签。",
+      preload: "auto",
+      controls: true,
+      autoplay: false,
+      loop: false,
+      muted: false
+    }
   }
 ];
 export default materialsList;
