@@ -9,31 +9,31 @@
     <el-dropdown @command="handleDropdownCommand" placement="bottom">
       <div class="toolbar__item"><i class="el-icon-user"></i></div>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="center">个人中心</el-dropdown-item>
-        <el-dropdown-item command="exit" divided>退出</el-dropdown-item>
+        <el-dropdown-item command="modifyPwd">修改密码</el-dropdown-item>
+        <el-dropdown-item command="logout">注销账户</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </div>
 </template>
 
 <script>
+import { updateUser } from "@/api/user";
+import { mapState } from "vuex";
+const CryptoJS = require("crypto-js");
 export default {
   name: "Toolbar",
+  computed: {
+    ...mapState({
+      userId: state => state.user.id
+    })
+  },
   methods: {
     /**
      * 处理下拉框触发事件
      * @param {string} command 指令
      */
     handleDropdownCommand(command) {
-      switch (command) {
-        case "center":
-          // TODO 个人中心
-          break;
-        case "exit":
-          this.$router.push({ name: "Login" });
-          sessionStorage.removeItem("isAuthenticated");
-          break;
-      }
+      this[command] && this[command]();
     },
     /**
      * 展示回收站
@@ -47,6 +47,39 @@ export default {
      */
     linkTo(routerName) {
       this.$router.push({ name: routerName });
+    },
+    /**
+     * 修改密码
+     */
+    modifyPwd() {
+      this.$prompt("", "请输入新密码", {
+        showCancelButton: false,
+        confirmButtonText: "确定",
+        inputPattern: /^[a-zA-Z0-9]{6,10}$/,
+        inputErrorMessage: "密码只能为6到10位到数字或字母组合"
+      }).then(async res => {
+        const password = CryptoJS.AES.encrypt(
+          res.value,
+          "jigsaw-h5"
+        ).toString();
+        const user = await updateUser(this.userId, { password }).then(
+          res => res.data
+        );
+        if (user && user.id) {
+          this.$message({
+            message: "修改成功",
+            type: "success",
+            duration: 800
+          });
+        }
+      });
+    },
+    /**
+     * 注销
+     */
+    logout() {
+      sessionStorage.removeItem("isAuthenticated");
+      this.$router.push({ name: "Login" });
     }
   }
 };
@@ -59,6 +92,7 @@ $blue: #2f55eb;
     display: flex;
     &__item {
       margin: 0 10px;
+      outline: none;
       width: 50px;
       height: 50px;
       line-height: 50px;
