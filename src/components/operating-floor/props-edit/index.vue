@@ -186,7 +186,7 @@ export default {
       ],
       viewportWidth: 375,
       viewportHeight: 667,
-      activeNames: [],
+      activeNames: ["component"],
       pickerOptions: {
         disabledDate: time => {
           return new Date(time) < new Date();
