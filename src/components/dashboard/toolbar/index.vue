@@ -8,7 +8,8 @@
     </div>
     <el-dropdown @command="handleDropdownCommand" placement="bottom">
       <div class="toolbar__item"><i class="el-icon-user"></i></div>
-      <el-dropdown-menu slot="dropdown">
+      <el-dropdown-menu slot="dropdown" class="userInfo">
+        <p>{{ userInfo.account }}</p>
         <el-dropdown-item command="modifyPwd">修改密码</el-dropdown-item>
         <el-dropdown-item command="logout">注销账户</el-dropdown-item>
       </el-dropdown-menu>
@@ -103,6 +104,28 @@ $blue: #2f55eb;
       background-color: #ffffff;
       box-shadow: 0 0 8px rgb(0, 0, 0, 0.1);
       cursor: pointer;
+      .userinfo {
+        font-size: 12px;
+      }
+    }
+  }
+}
+.userInfo {
+  p {
+    margin: 0;
+    line-height: 36px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    color: $blue;
+    user-select: none;
+  }
+  .el-dropdown-menu__item {
+    &:hover {
+      padding-left: 18px;
+      color: $blue;
+      border-left: solid 2px $blue;
+      background-color: #ffffff;
     }
   }
 }

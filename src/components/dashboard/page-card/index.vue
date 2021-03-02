@@ -4,7 +4,7 @@
       <p class="name">{{ page.name }}</p>
       <el-dropdown size="small" @command="handleDropdownCommand">
         <span class="dropdown"><i class="el-icon-more"></i></span>
-        <el-dropdown-menu slot="dropdown">
+        <el-dropdown-menu slot="dropdown" class="page-card__dropdown">
           <el-dropdown-item
             v-for="command in commandList"
             :key="command.key"
@@ -101,6 +101,7 @@ export default {
 </script>
 
 <style lang="scss">
+$blue: #2f55eb;
 .page-card {
   .header {
     padding: 5px;
@@ -140,6 +141,16 @@ export default {
       font-size: 20px;
       background-color: #ffffff;
       transition: all 1s;
+    }
+  }
+  &__dropdown {
+    transform: translateX(8px);
+    .el-dropdown-menu__item {
+      &:hover {
+        font-weight: bold;
+        color: $blue;
+        background-color: #ffffff;
+      }
     }
   }
 }
