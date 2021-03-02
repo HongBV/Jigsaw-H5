@@ -1,11 +1,11 @@
 const state = {
-  id: sessionStorage.getItem("userId")
+  userInfo: JSON.parse(sessionStorage.getItem("userInfo") || "{}")
 };
 const actions = {};
 const mutations = {
-  setUserId(state, id) {
-    state.id = id;
-    sessionStorage.setItem("userId", id);
+  setUserInfo(state, userInfo) {
+    state.userInfo = userInfo;
+    sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
   }
 };
 

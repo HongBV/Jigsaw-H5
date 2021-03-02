@@ -24,7 +24,7 @@ export default {
   name: "Toolbar",
   computed: {
     ...mapState({
-      userId: state => state.user.id
+      userInfo: state => state.user.userInfo
     })
   },
   methods: {
@@ -62,7 +62,7 @@ export default {
           res.value,
           "jigsaw-h5"
         ).toString();
-        const user = await updateUser(this.userId, { password }).then(
+        const user = await updateUser(this.userInfo.id, { password }).then(
           res => res.data
         );
         if (user && user.id) {

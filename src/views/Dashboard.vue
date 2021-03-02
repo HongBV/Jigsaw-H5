@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     ...mapState({
-      userId: state => state.user.id
+      userInfo: state => state.user.userInfo
     }),
     filterPageList() {
       return this.pageList.filter(
@@ -80,7 +80,7 @@ export default {
      * 获取页面列表
      */
     async fetchPageList() {
-      this.pageList = await getAllPages(this.userId).then(res => res.data);
+      this.pageList = await getAllPages(this.userInfo.id).then(res => res.data);
     },
     /**
      * 创建新页面
@@ -96,7 +96,7 @@ export default {
         const page = await createPage({
           page: [],
           name,
-          creatorId: this.userId
+          creatorId: this.userInfo.id
         }).then(res => res.data);
         this.setPageId(page.id);
         this.$router.push({

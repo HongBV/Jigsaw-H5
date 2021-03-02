@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     ...mapState({
-      userId: state => state.user.id
+      userInfo: state => state.user.userInfo
     })
   },
   methods: {
@@ -43,7 +43,7 @@ export default {
      * 展示回收站
      */
     async showRecycleBin() {
-      this.pageList = await getAllDeletedPages(this.userId).then(
+      this.pageList = await getAllDeletedPages(this.userInfo.id).then(
         res => res.data
       );
       this.visible = true;

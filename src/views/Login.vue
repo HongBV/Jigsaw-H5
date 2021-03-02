@@ -59,7 +59,7 @@ export default {
     this.handleSubmit = debounce(this.handleSubmit, 1000, { leading: true });
   },
   methods: {
-    ...mapMutations(["setUserId"]),
+    ...mapMutations(["setUserInfo"]),
     /**
      * 用户登录
      */
@@ -71,7 +71,7 @@ export default {
       );
       if (success) {
         sessionStorage.setItem("isAuthenticated", true);
-        this.setUserId(data.id);
+        this.setUserInfo(data);
         this.$message({
           message: "登录成功",
           type: "success",
