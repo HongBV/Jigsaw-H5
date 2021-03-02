@@ -1,24 +1,19 @@
 # jigsaw-h5
 
-## Project setup
+## 本地开发
+### 安装依赖
 ```
-yarn install
+npm install
 ```
-
-### Compiles and hot-reloads for development
+### 本地运行
 ```
-yarn serve
+npm run dev
 ```
-
-### Compiles and minifies for production
+### 本地构建
 ```
-yarn build
+npm run build
 ```
-
-### Lints and fixes files
+### Lint
 ```
-yarn lint
+npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
