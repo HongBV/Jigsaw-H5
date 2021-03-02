@@ -1,13 +1,13 @@
 <template>
   <div class="layout-item" @click.stop="editMaterial">
     <component :is="material.component" :config="material.config"></component>
-    <div class="mask" v-if="!preview"></div>
+    <div class="mask" v-if="!preview && componentMask"></div>
   </div>
 </template>
 
 <script>
 import { _register_components_object } from "@/components/materials/index.js";
-import { mapMutations } from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "LayoutItem",
   components: {
@@ -25,6 +25,11 @@ export default {
   },
   data() {
     return {};
+  },
+  computed: {
+    ...mapState({
+      componentMask: state => state.editor.componentMask
+    })
   },
   methods: {
     ...mapMutations(["setCurrentMaterial"]),

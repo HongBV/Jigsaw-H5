@@ -3,7 +3,8 @@ const state = {
   page: [],
   currentMaterial: {},
   viewportWidth: 375,
-  viewportHeight: 667
+  viewportHeight: 667,
+  componentMask: false
 };
 const actions = {};
 const mutations = {
@@ -49,6 +50,9 @@ const mutations = {
   },
   setViewportHeight(state, height) {
     state.viewportHeight = height;
+  },
+  setComponentMask(state, visible) {
+    state.componentMask = visible;
   }
 };
 

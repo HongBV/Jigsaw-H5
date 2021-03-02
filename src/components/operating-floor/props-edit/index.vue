@@ -37,12 +37,7 @@
             v-for="(editItem, idx) in currentMaterial.editData"
             :key="idx"
           >
-            <span
-              class="label"
-              v-if="
-                !['Form', 'Icon', 'ImageList', 'Tab'].includes(editItem.type)
-              "
-            >
+            <span class="label" v-if="getLabelVisible(editItem.type)">
               {{ editItem.name }}
             </span>
             <el-input
@@ -50,7 +45,7 @@
               class="input"
               v-model="currentMaterial.config[editItem.key]"
               :type="editItem.type"
-            ></el-input>
+            />
             <el-input-number
               v-if="editItem.type === 'Number'"
               v-model="currentMaterial.config[editItem.key]"
@@ -59,14 +54,13 @@
               :max="editItem.max"
               :min="editItem.min"
               step-strictly
-            ></el-input-number>
+            />
             <el-switch
               v-if="editItem.type === 'Switch'"
               v-model="currentMaterial.config[editItem.key]"
               active-color="#13ce66"
               inactive-color="#ff4949"
-            >
-            </el-switch>
+            />
             <el-select
               v-if="editItem.type === 'Select'"
               class="select"
@@ -90,8 +84,7 @@
               popper-class="props-edit-date-picker"
               :clearable="false"
               :firstDayOfWeek="1"
-            >
-            </el-date-picker>
+            />
             <form-edit
               v-if="editItem.type === 'Form'"
               :form="currentMaterial.config[editItem.key]"
@@ -156,8 +149,17 @@
             :max="1000"
             :min="667"
             step-strictly
-          ></el-input-number></div
-      ></template>
+          />
+        </div>
+        <div class="text-input">
+          <span class="label">组件遮罩</span>
+          <el-switch
+            v-model="componentMask"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+          />
+        </div>
+      </template>
     </section>
   </div>
 </template>
@@ -193,6 +195,7 @@ export default {
       ],
       viewportWidth: 375,
       viewportHeight: 667,
+      componentMask: false,
       activeNames: ["component"]
     };
   },
@@ -212,6 +215,9 @@ export default {
     viewportHeight(val) {
       this.setViewportHeight(val);
     },
+    componentMask(val) {
+      this.setComponentMask(val);
+    },
     machine(val) {
       if (!val || val === "自定义") return;
       const [width, height] = machineSize[val];
@@ -230,7 +236,8 @@ export default {
       "addMaterial",
       "resetCurrentMaterial",
       "setViewportWidth",
-      "setViewportHeight"
+      "setViewportHeight",
+      "setComponentMask"
     ]),
     /**
      * 删除该组件
@@ -258,6 +265,13 @@ export default {
      */
     updatePage() {
       this.page.splice(0, 0);
+    },
+    /**
+     * 获取label可见性
+     * @param {string} type
+     */
+    getLabelVisible(type) {
+      return !["Form", "Icon", "ImageList", "Tab"].includes(type);
     }
   }
 };
