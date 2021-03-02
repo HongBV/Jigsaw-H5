@@ -81,6 +81,17 @@
                 :value="item.value"
               />
             </el-select>
+            <el-date-picker
+              v-if="editItem.type === 'Datetime'"
+              v-model="currentMaterial.config[editItem.key]"
+              type="datetime"
+              size="small"
+              placeholder="选择截止日期与时间"
+              popper-class="props-edit-date-picker"
+              :clearable="false"
+              :firstDayOfWeek="1"
+            >
+            </el-date-picker>
             <form-edit
               v-if="editItem.type === 'Form'"
               :form="currentMaterial.config[editItem.key]"
@@ -94,18 +105,6 @@
               v-if="editItem.type === 'ImageList'"
               :list="currentMaterial.config[editItem.key]"
             />
-            <el-date-picker
-              v-if="editItem.type === 'Datetime'"
-              v-model="currentMaterial.config[editItem.key]"
-              type="datetime"
-              size="small"
-              placeholder="选择截止日期与时间"
-              popper-class="props-edit-date-picker"
-              :clearable="false"
-              :picker-options="pickerOptions"
-              :firstDayOfWeek="1"
-            >
-            </el-date-picker>
             <tab-edit
               v-if="editItem.type === 'Tab'"
               :tabs="currentMaterial.config[editItem.key]"
@@ -194,12 +193,7 @@ export default {
       ],
       viewportWidth: 375,
       viewportHeight: 667,
-      activeNames: ["component"],
-      pickerOptions: {
-        disabledDate: time => {
-          return new Date(time) < new Date();
-        }
-      }
+      activeNames: ["component"]
     };
   },
   computed: {
