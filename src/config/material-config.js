@@ -555,6 +555,21 @@ const materialsList = [
         max: 48
       },
       {
+        key: "color",
+        name: "颜色",
+        type: "Color"
+      },
+      {
+        key: "badge",
+        name: "徽标",
+        type: "Text"
+      },
+      {
+        key: "dot",
+        name: "圆点",
+        type: "Switch"
+      },
+      {
         key: "text",
         name: "文案",
         type: "Text"
@@ -583,8 +598,11 @@ const materialsList = [
       }
     ],
     config: {
-      type: "el-icon-edit",
+      type: "location-o",
       size: 24,
+      color: "#323233",
+      badge: "",
+      dot: false,
       text: "图标",
       textSize: 12,
       hyperlink: false,

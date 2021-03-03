@@ -1,7 +1,13 @@
 <template>
   <div class="bv-icon" @click="handleClick">
-    <i :class="config.type" :style="{ 'font-size': config.size + 'px' }"></i>
-    <span :style="{ 'font-size': config.textSize + 'px' }">
+    <van-icon
+      :name="config.type"
+      :size="config.size"
+      :color="config.color"
+      :badge="config.badge"
+      :dot="config.dot"
+    />
+    <span :style="{ 'font-size': config.textSize + 'px', color: config.color }">
       {{ config.text }}
     </span>
   </div>
@@ -14,8 +20,11 @@ export default {
     config: {
       type: Object,
       default: () => ({
-        type: "el-icon-edit",
+        type: "location-o",
         size: 24,
+        color: "#323233",
+        badge: "",
+        dot: false,
         text: "",
         textSize: 12,
         hyperlink: false,

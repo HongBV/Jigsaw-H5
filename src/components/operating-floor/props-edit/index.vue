@@ -92,7 +92,7 @@
             <icon-select
               v-if="editItem.type === 'Icon'"
               :icon="currentMaterial.config[editItem.key]"
-              @modifyProp="val => modifyProp(editItem.key, val)"
+              @changeIcon="val => (currentMaterial.config[editItem.key] = val)"
             />
             <list-edit
               v-if="editItem.type === 'ImageList'"
@@ -265,13 +265,6 @@ export default {
     copyItem() {
       const currentMaterial = JSON.parse(JSON.stringify(this.currentMaterial));
       this.addMaterial(currentMaterial);
-    },
-    /**
-     * @param {string} prop
-     * @param {any} value
-     */
-    modifyProp(prop, value) {
-      this.currentMaterial.config[prop] = value;
     },
     /**
      * 刷新页面
