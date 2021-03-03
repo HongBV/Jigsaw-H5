@@ -32,6 +32,10 @@
         >
           <grid-item
             class="item"
+            :style="{
+              outlineColor: selectedBorderColor,
+              outlineStyle: selectedBorderStyle
+            }"
             v-for="item in page"
             :x="item.x"
             :y="item.y"
@@ -67,7 +71,9 @@ export default {
       page: state => state.editor.page,
       viewportWidth: state => state.editor.viewportWidth,
       viewportHeight: state => state.editor.viewportHeight,
-      verticalCompact: state => state.editor.verticalCompact
+      verticalCompact: state => state.editor.verticalCompact,
+      selectedBorderColor: state => state.editor.selectedBorderColor,
+      selectedBorderStyle: state => state.editor.selectedBorderStyle
     })
   },
   created() {
@@ -118,6 +124,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$blue: #2f55eb;
 .layout-edit {
   position: relative;
   height: 100%;
@@ -137,7 +144,7 @@ export default {
     cursor: pointer;
     z-index: 10;
     &:hover {
-      color: rgb(47, 84, 235);
+      color: $blue;
     }
   }
   .el-backtop {
@@ -154,8 +161,9 @@ export default {
         position: relative;
         overflow: hidden;
         touch-action: none;
+        outline-width: 0;
         &:hover {
-          outline: 2px solid #006aff;
+          outline-width: 2px;
           z-index: 1;
         }
       }

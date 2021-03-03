@@ -5,7 +5,9 @@ const state = {
   viewportWidth: 375,
   viewportHeight: 667,
   componentMask: false,
-  verticalCompact: false
+  verticalCompact: false,
+  selectedBorderColor: "#2f55eb",
+  selectedBorderStyle: "solid"
 };
 const actions = {};
 const mutations = {
@@ -57,6 +59,12 @@ const mutations = {
   },
   setVerticalCompact(state, verticalCompact) {
     state.verticalCompact = verticalCompact;
+  },
+  setSelectedBorderColor(state, selectedBorderColor) {
+    state.selectedBorderColor = selectedBorderColor;
+  },
+  setSelectedBorderStyle(state, selectedBorderStyle) {
+    state.selectedBorderStyle = selectedBorderStyle;
   }
 };
 

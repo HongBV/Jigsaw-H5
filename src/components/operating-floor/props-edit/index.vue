@@ -151,23 +151,35 @@
             step-strictly
           />
         </div>
-        <div class="text-input">
-          <span class="label">组件遮罩</span>
-          <el-switch
-            v-model="componentMask"
-            active-color="#13ce66"
-            inactive-color="#ff4949"
-          />
-        </div>
-        <div class="text-input">
-          <span class="label">自动布局</span>
-          <el-switch
-            v-model="verticalCompact"
-            active-color="#13ce66"
-            inactive-color="#ff4949"
-          />
-        </div>
       </template>
+      <div class="text-input">
+        <span class="label">选中颜色</span>
+        <el-input class="input" v-model="selectedBorderColor" type="color" />
+      </div>
+      <div class="text-input">
+        <span class="label">选中样式</span>
+        <el-select class="select" v-model="selectedBorderStyle" size="small">
+          <el-option label="点状" value="dotted" />
+          <el-option label="虚线" value="dashed" />
+          <el-option label="实线" value="solid" />
+        </el-select>
+      </div>
+      <div class="text-input">
+        <span class="label">组件遮罩</span>
+        <el-switch
+          v-model="componentMask"
+          active-color="#13ce66"
+          inactive-color="#ff4949"
+        />
+      </div>
+      <div class="text-input">
+        <span class="label">紧凑布局</span>
+        <el-switch
+          v-model="verticalCompact"
+          active-color="#13ce66"
+          inactive-color="#ff4949"
+        />
+      </div>
     </section>
   </div>
 </template>
@@ -203,6 +215,8 @@ export default {
       ],
       viewportWidth: 375,
       viewportHeight: 667,
+      selectedBorderColor: "#2f55eb",
+      selectedBorderStyle: "solid",
       componentMask: false,
       verticalCompact: false,
       activeNames: ["component"]
@@ -230,6 +244,12 @@ export default {
     verticalCompact(val) {
       this.setVerticalCompact(val);
     },
+    selectedBorderColor(val) {
+      this.setSelectedBorderColor(val);
+    },
+    selectedBorderStyle(val) {
+      this.setSelectedBorderStyle(val);
+    },
     machine(val) {
       if (!val || val === "自定义") return;
       const [width, height] = machineSize[val];
@@ -250,7 +270,9 @@ export default {
       "setViewportWidth",
       "setViewportHeight",
       "setComponentMask",
-      "setVerticalCompact"
+      "setVerticalCompact",
+      "setSelectedBorderColor",
+      "setSelectedBorderStyle"
     ]),
     /**
      * 删除该组件
