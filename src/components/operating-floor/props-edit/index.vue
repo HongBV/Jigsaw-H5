@@ -159,6 +159,14 @@
             inactive-color="#ff4949"
           />
         </div>
+        <div class="text-input">
+          <span class="label">自动布局</span>
+          <el-switch
+            v-model="verticalCompact"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+          />
+        </div>
       </template>
     </section>
   </div>
@@ -196,6 +204,7 @@ export default {
       viewportWidth: 375,
       viewportHeight: 667,
       componentMask: false,
+      verticalCompact: false,
       activeNames: ["component"]
     };
   },
@@ -218,6 +227,9 @@ export default {
     componentMask(val) {
       this.setComponentMask(val);
     },
+    verticalCompact(val) {
+      this.setVerticalCompact(val);
+    },
     machine(val) {
       if (!val || val === "自定义") return;
       const [width, height] = machineSize[val];
@@ -237,7 +249,8 @@ export default {
       "resetCurrentMaterial",
       "setViewportWidth",
       "setViewportHeight",
-      "setComponentMask"
+      "setComponentMask",
+      "setVerticalCompact"
     ]),
     /**
      * 删除该组件

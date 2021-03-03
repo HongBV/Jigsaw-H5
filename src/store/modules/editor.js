@@ -4,7 +4,8 @@ const state = {
   currentMaterial: {},
   viewportWidth: 375,
   viewportHeight: 667,
-  componentMask: false
+  componentMask: false,
+  verticalCompact: false
 };
 const actions = {};
 const mutations = {
@@ -53,6 +54,9 @@ const mutations = {
   },
   setComponentMask(state, visible) {
     state.componentMask = visible;
+  },
+  setVerticalCompact(state, verticalCompact) {
+    state.verticalCompact = verticalCompact;
   }
 };
 

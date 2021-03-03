@@ -26,7 +26,7 @@
           :is-draggable="true"
           :is-resizable="true"
           :is-mirrored="false"
-          :vertical-compact="true"
+          :vertical-compact="verticalCompact"
           :margin="[0, 0]"
           :use-css-transforms="true"
         >
@@ -66,7 +66,8 @@ export default {
     ...mapState({
       page: state => state.editor.page,
       viewportWidth: state => state.editor.viewportWidth,
-      viewportHeight: state => state.editor.viewportHeight
+      viewportHeight: state => state.editor.viewportHeight,
+      verticalCompact: state => state.editor.verticalCompact
     })
   },
   created() {
