@@ -154,11 +154,8 @@ export default {
         position: relative;
         overflow: hidden;
         touch-action: none;
-        box-sizing: border-box;
-        border: 2px solid transparent;
         &:hover {
-          padding: 0;
-          border: 2px solid #006aff;
+          outline: 2px solid #006aff;
           z-index: 1;
         }
       }
