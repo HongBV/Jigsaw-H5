@@ -416,6 +416,27 @@ const materialsList = [
         max: 200
       },
       {
+        key: "padding",
+        name: "内边距",
+        type: "Number",
+        step: 1,
+        min: 0,
+        max: 100
+      },
+      {
+        key: "showIcon",
+        name: "图标",
+        type: "Switch"
+      },
+      {
+        key: "fontSize",
+        name: "字号",
+        type: "Number",
+        step: 1,
+        min: 12,
+        max: 30
+      },
+      {
         key: "color",
         name: "字体色",
         type: "Color"
@@ -431,6 +452,9 @@ const materialsList = [
       scrollable: true,
       wrapable: false,
       speed: 50,
+      padding: 16,
+      showIcon: true,
+      fontSize: 14,
       color: "#ff6600",
       background: "#fff7cc"
     }

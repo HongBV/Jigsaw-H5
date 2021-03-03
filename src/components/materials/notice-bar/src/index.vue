@@ -1,13 +1,17 @@
 <template>
   <van-notice-bar
     class="bv-notoce-bar"
-    left-icon="volume-o"
+    :left-icon="config.showIcon ? 'volume-o' : ''"
     :text="config.text"
     :scrollable="config.scrollable"
     :wrapable="config.wrapable"
     :speed="config.speed"
     :color="config.color"
     :background="config.background"
+    :style="{
+      padding: `8px ${config.padding}px`,
+      fontSize: `${config.fontSize}px`
+    }"
   />
 </template>
 
@@ -22,6 +26,9 @@ export default {
         scrollable: true,
         wrapable: false,
         speed: 50,
+        padding: 8,
+        showIcon: true,
+        fontSize: 14,
         color: "#ff6600",
         background: "#fff7cc"
       })
@@ -34,5 +41,8 @@ export default {
 .bv-notoce-bar {
   width: 100%;
   box-sizing: border-box;
+  ::v-deep.van-notice-bar__content {
+    transition-property: transform;
+  }
 }
 </style>
