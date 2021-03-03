@@ -205,6 +205,45 @@ const materialsList = [
         key: "targetUrl",
         name: "链接地址",
         type: "Text"
+      },
+      {
+        key: "showTitle",
+        name: "开启标题",
+        type: "Switch"
+      },
+      {
+        key: "title",
+        name: "标题",
+        type: "Text"
+      },
+      {
+        key: "color",
+        name: "标题颜色",
+        type: "Color"
+      },
+      {
+        key: "fontSize",
+        name: "标题字号",
+        type: "Number",
+        step: 1,
+        min: 12,
+        max: 42
+      },
+      {
+        key: "x",
+        name: "水平偏移",
+        type: "Number",
+        step: 1,
+        min: -300,
+        max: 300
+      },
+      {
+        key: "y",
+        name: "垂直偏移",
+        type: "Number",
+        step: 1,
+        min: -300,
+        max: 300
       }
     ],
     config: {
@@ -212,7 +251,13 @@ const materialsList = [
       fit: "cover",
       borderRadius: 0,
       hyperlink: false,
-      targetUrl: ""
+      targetUrl: "",
+      showTitle: true,
+      title: "",
+      color: "#f0f0f0",
+      fontSize: 14,
+      x: 0,
+      y: 0
     }
   },
   // BvPlaceholder

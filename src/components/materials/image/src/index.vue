@@ -6,6 +6,17 @@
     :radius="config.borderRadius"
     @click="handleClick"
   >
+    <p
+      v-if="config.showTitle"
+      class="title"
+      :style="{
+        color: config.color,
+        fontSize: config.fontSize + 'px',
+        transform: `translate(calc(-50% + ${config.x}px), calc(-50% + ${config.y}px))`
+      }"
+    >
+      {{ config.title }}
+    </p>
   </van-image>
 </template>
 
@@ -20,7 +31,13 @@ export default {
         fit: "cover",
         borderRadius: 0,
         hyperlink: false,
-        targetUrl: ""
+        targetUrl: "",
+        showTitle: true,
+        title: "",
+        color: "#f0f0f0",
+        fontSize: 14,
+        x: 0,
+        y: 0
       })
     }
   },
@@ -36,7 +53,15 @@ export default {
 
 <style lang="scss" scoped>
 .bv-image {
+  position: relative;
   width: 100%;
   height: 100%;
+  .title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    text-align: center;
+  }
 }
 </style>
