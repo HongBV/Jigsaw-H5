@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./index";
 export const getAllPages = userId => axios.get(`/api/page?userId=${userId}`);
 export const getAllDeletedPages = userId =>
   axios.get(`/api/page/del?userId=${userId}`);
