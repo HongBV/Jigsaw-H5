@@ -80,7 +80,7 @@
               v-model="currentMaterial.config[editItem.key]"
               type="datetime"
               size="small"
-              placeholder="选择截止日期与时间"
+              placeholder="选择日期与时间"
               popper-class="props-edit-date-picker"
               :clearable="false"
               :firstDayOfWeek="1"
