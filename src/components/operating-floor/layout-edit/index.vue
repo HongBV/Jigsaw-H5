@@ -162,6 +162,7 @@ $blue: #2f55eb;
         overflow: hidden;
         touch-action: none;
         outline-width: 0;
+        box-sizing: border-box;
         &:hover {
           outline-width: 2px;
           z-index: 1;
