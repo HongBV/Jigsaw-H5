@@ -8,7 +8,7 @@
     :is-draggable="false"
     :is-resizable="false"
     :is-mirrored="false"
-    :vertical-compact="true"
+    :vertical-compact="false"
     :margin="[0, 0]"
   >
     <grid-item
