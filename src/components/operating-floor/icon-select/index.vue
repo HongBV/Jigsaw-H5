@@ -5,6 +5,7 @@
       <el-select class="style-select" v-model="style" size="mini">
         <el-option label="实体" value="solid" />
         <el-option label="线框" value="outline" />
+        <el-option label="基础" value="base" />
       </el-select>
     </header>
     <ul class="icon-list">
