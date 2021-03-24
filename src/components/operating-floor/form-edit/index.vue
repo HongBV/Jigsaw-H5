@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import FormEditItem from "@/components/operating-floor/form-edit-item";
+import FormEditItem from "./form-edit-item";
 
 export default {
   name: "FormEdit",

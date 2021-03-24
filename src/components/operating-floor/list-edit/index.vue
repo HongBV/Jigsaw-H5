@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import ListEditItem from "@/components/operating-floor/list-edit-item";
+import ListEditItem from "./list-edit-item";
 
 export default {
   name: "ListEdit",

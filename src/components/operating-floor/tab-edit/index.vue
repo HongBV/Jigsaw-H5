@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import TabEditItem from "@/components/operating-floor/tab-edit-item";
+import TabEditItem from "./tab-edit-item";
 
 export default {
   name: "tabEdit",
